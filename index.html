@@ -754,7 +754,7 @@
             let users = localStorage.getItem('et_users') ? JSON.parse(localStorage.getItem('et_users')) : [];
             if(users.some(u => u.email === email)) { document.getElementById('regError').textContent = "Этот Email уже занят!"; document.getElementById('regError').style.display = 'block'; return; }
 
-            const newUser = { name, email, password, avatarUrl: "https://ia600802.us.archive.org/21/items/egorphotoegortubeprew/f7bf88db-5aa3-44da-939b-0b8d05798be4-profile_image-300x300.png"
+            const newUser = { name, email, password, avatarUrl: "https://ia600802.us.archive.org/21/items/egorphotoegortubeprew/f7bf88db-5aa3-44da-939b-0b8d05798be4-profile_image-300x300.png" };
             users.push(newUser); localStorage.setItem('et_users', JSON.stringify(users));
             currentUser = newUser; localStorage.setItem('et_current_user', JSON.stringify(newUser));
             checkUserSession(); closeAuthModal();
