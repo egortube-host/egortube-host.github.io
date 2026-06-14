@@ -9,279 +9,325 @@
     
     <style>
         /* =========================================
-           MATERIAL 3 DESIGN TOKENS (DARK THEME)
+           YOUTUBE DARK THEME TOKENS
            ========================================= */
         :root {
-            --md-sys-color-background: #111318;
-            --md-sys-color-on-background: #e2e2e6;
-            --md-sys-color-surface: #1a1c22;
-            --md-sys-color-surface-container: #1e2025;
-            --md-sys-color-surface-variant: #43474e;
-            --md-sys-color-on-surface-variant: #c3c6cf;
-            --md-sys-color-primary: #a8c7fa;
-            --md-sys-color-on-primary: #063162;
-            --md-sys-color-primary-container: #234774;
-            --md-sys-color-outline: #8c9199;
-            --md-sys-color-error: #ffb4ab;
-            
+            --yt-background: #0f0f0f;
+            --yt-surface: #0f0f0f;
+            --yt-surface-hover: #272727;
+            --yt-text-primary: #f1f1f1;
+            --yt-text-secondary: #aaaaaa;
+            --yt-border: #3f3f3f;
+            --yt-search-bg: #121212;
+            --yt-search-border: #303030;
+            --yt-search-btn: #222222;
+            --yt-chip-bg: rgba(255, 255, 255, 0.1);
+            --yt-chip-bg-hover: rgba(255, 255, 255, 0.2);
+            --yt-chip-active-bg: #f1f1f1;
+            --yt-chip-active-text: #0f0f0f;
             --youtube-red: #ff0000;
-            --transition-smooth: all 0.3s cubic-bezier(0.2, 0, 0, 1);
+            --transition-smooth: all 0.2s ease;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Roboto', sans-serif; -webkit-font-smoothing: antialiased; }
-        body { background-color: var(--md-sys-color-background); color: var(--md-sys-color-on-background); overflow-x: hidden; }
+        body { background-color: var(--yt-background); color: var(--yt-text-primary); overflow-x: hidden; }
 
         ::-webkit-scrollbar { width: 8px; height: 8px; }
         ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: var(--md-sys-color-surface-variant); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb { background: #717171; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #a0a0a0; }
 
         /* =========================================
            HEADER & SEARCH
            ========================================= */
         header {
-            display: flex; justify-content: space-between; align-items: center; padding: 0 24px;
-            height: 64px; background-color: var(--md-sys-color-background);
-            position: fixed; top: 0; width: 100%; z-index: 100; border-bottom: 1px solid rgba(255,255,255,0.05);
+            display: flex; justify-content: space-between; align-items: center; padding: 0 16px;
+            height: 56px; background-color: var(--yt-background);
+            position: fixed; top: 0; width: 100%; z-index: 100;
         }
 
-        .logo { font-size: 22px; font-weight: 700; cursor: pointer; letter-spacing: -0.5px; display: flex; align-items: center; gap: 6px; }
-        .logo span { color: var(--youtube-red); }
+        .header-left { display: flex; align-items: center; gap: 16px; }
+        .menu-btn { font-size: 20px; cursor: pointer; padding: 8px; color: var(--yt-text-primary); border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; }
+        .menu-btn:hover { background-color: var(--yt-surface-hover); }
+        
+        .logo { font-size: 20px; font-weight: 700; cursor: pointer; letter-spacing: -1px; display: flex; align-items: center; gap: 4px; }
+        .logo i { font-size: 24px; }
+        .logo sup { font-size: 10px; color: var(--yt-text-secondary); font-weight: 400; margin-top: -10px; margin-left: 2px; }
 
-        .search-container { display: flex; flex: 0 1 640px; position: relative; }
-        .search-bar {
-            width: 100%; display: flex; align-items: center; background-color: var(--md-sys-color-surface-container);
-            border-radius: 28px; padding: 0 16px 0 24px; height: 48px; border: 1px solid transparent; transition: var(--transition-smooth);
-        }
-        .search-bar:focus-within { border-color: var(--md-sys-color-primary); background-color: var(--md-sys-color-background); box-shadow: 0 0 0 1px var(--md-sys-color-primary); }
-        .search-bar input { flex: 1; background: transparent; border: none; color: var(--md-sys-color-on-background); font-size: 16px; outline: none; }
-        .search-bar button { background: transparent; border: none; color: var(--md-sys-color-on-surface-variant); cursor: pointer; padding: 8px; font-size: 18px; border-radius: 50%; transition: var(--transition-smooth); }
-        .search-bar button:hover { background-color: rgba(255,255,255,0.1); }
+        .search-container { display: flex; flex: 0 1 720px; align-items: center; gap: 12px; margin-left: 40px; }
+        .search-bar-wrapper { display: flex; flex: 1; border: 1px solid var(--yt-search-border); border-radius: 40px; overflow: hidden; background-color: var(--yt-search-bg); height: 40px; margin-left: 32px;}
+        .search-bar-wrapper input { flex: 1; background: transparent; border: none; color: var(--yt-text-primary); font-size: 16px; padding: 0 16px 0 24px; outline: none; }
+        .search-bar-wrapper button { width: 64px; background-color: var(--yt-search-btn); border: none; border-left: 1px solid var(--yt-search-border); color: var(--yt-text-primary); cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; transition: var(--transition-smooth); }
+        .search-bar-wrapper button:hover { background-color: #303030; }
 
-        .mobile-search-close { display: none; background: transparent; border: none; color: var(--md-sys-color-on-background); font-size: 18px; margin-right: 12px; cursor: pointer; }
-        .mobile-search-btn { display: none; background: transparent; border: none; color: var(--md-sys-color-on-background); font-size: 18px; cursor: pointer; padding: 8px; border-radius: 50%; transition: var(--transition-smooth); }
-        .mobile-search-btn:hover { background-color: rgba(255,255,255,0.1); }
+        .header-right { display: flex; align-items: center; gap: 12px; position: relative; }
+        .icon-btn { position: relative; width: 40px; height: 40px; border-radius: 50%; border: none; background: transparent; color: var(--yt-text-primary); font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        .icon-btn:hover { background-color: var(--yt-surface-hover); }
 
-        .auth-action-btn {
-            background-color: var(--md-sys-color-primary-container); color: var(--md-sys-color-primary);
-            border: none; padding: 0 20px; height: 40px; border-radius: 20px;
-            font-weight: 500; font-size: 14px; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: var(--transition-smooth);
-        }
-        .auth-action-btn:hover { box-shadow: 0 1px 3px rgba(0,0,0,0.4); filter: brightness(1.1); }
-        .user-profile-zone { display: none; align-items: center; gap: 12px; cursor: pointer; position: relative; }
-        .user-avatar { width: 40px; height: 40px; border-radius: 50%; background-color: var(--md-sys-color-primary); color: var(--md-sys-color-on-primary); display: flex; justify-content: center; align-items: center; font-weight: bold; overflow: hidden; }
+        /* Уведомления */
+        .notifications-dropdown { display: none; position: absolute; top: 48px; right: 50px; background-color: #212121; border-radius: 12px; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.5); width: 300px; min-height: 150px; z-index: 200; flex-direction: column; align-items: center; justify-content: center; border: 1px solid var(--yt-border); }
+        .notifications-dropdown.active { display: flex; }
+        .notifications-dropdown i { font-size: 32px; color: var(--yt-text-secondary); margin-bottom: 12px; }
+        .notifications-dropdown span { color: var(--yt-text-secondary); font-size: 14px; text-align: center; }
+
+        .auth-action-btn { background-color: transparent; color: #3ea6ff; border: 1px solid var(--yt-border); padding: 0 16px; height: 36px; border-radius: 18px; font-weight: 500; font-size: 14px; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: var(--transition-smooth); }
+        .auth-action-btn:hover { background-color: rgba(62, 166, 255, 0.1); border-color: transparent; }
+        
+        .user-profile-zone { display: none; align-items: center; cursor: pointer; }
+        .user-avatar { width: 32px; height: 32px; border-radius: 50%; background-color: #555; color: white; display: flex; justify-content: center; align-items: center; font-weight: bold; overflow: hidden; margin-left: 8px; }
         .user-avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* =========================================
+           CATEGORY CHIPS
+           ========================================= */
+        .category-chips-container {
+            position: fixed; top: 56px; width: calc(100% - 240px); left: 240px; height: 56px;
+            background-color: var(--yt-background); z-index: 99; display: flex; align-items: center;
+            padding: 0 24px; gap: 12px; overflow-x: auto; transition: var(--transition-smooth);
+        }
+        .category-chips-container::-webkit-scrollbar { display: none; }
+        .chip {
+            background-color: var(--yt-chip-bg); color: var(--yt-text-primary); padding: 6px 12px;
+            border-radius: 8px; font-size: 14px; font-weight: 500; cursor: pointer; white-space: nowrap;
+            transition: var(--transition-smooth);
+        }
+        .chip:hover { background-color: var(--yt-chip-bg-hover); }
+        .chip.active { background-color: var(--yt-chip-active-bg); color: var(--yt-chip-active-text); }
 
         /* =========================================
            LAYOUT & SIDEBAR
            ========================================= */
-        .layout { display: flex; margin-top: 64px; height: calc(100vh - 64px); }
-        aside { width: 256px; background-color: var(--md-sys-color-background); padding: 12px; overflow-y: auto; }
+        .layout { display: flex; margin-top: 56px; height: calc(100vh - 56px); }
+        aside { width: 240px; background-color: var(--yt-background); padding: 12px; overflow-y: auto; flex-shrink: 0; position: fixed; height: calc(100vh - 56px); z-index: 90; transition: var(--transition-smooth); }
+        aside::-webkit-scrollbar { width: 8px; }
+        aside:hover::-webkit-scrollbar-thumb { background: #717171; }
+        aside::-webkit-scrollbar-thumb { background: transparent; }
 
         .nav-item {
-            display: flex; align-items: center; padding: 0 16px; height: 56px;
-            cursor: pointer; color: var(--md-sys-color-on-background); text-decoration: none;
-            border-radius: 28px; margin-bottom: 4px; font-weight: 500; font-size: 14px; transition: var(--transition-smooth);
+            display: flex; align-items: center; padding: 0 12px; height: 40px;
+            cursor: pointer; color: var(--yt-text-primary); border-radius: 10px;
+            font-size: 14px; transition: var(--transition-smooth); margin-bottom: 2px;
         }
-        .nav-item:hover { background-color: rgba(255,255,255,0.05); }
-        .nav-item.active { background-color: var(--md-sys-color-primary-container); color: var(--md-sys-color-primary); }
+        .nav-item:hover { background-color: var(--yt-surface-hover); }
+        .nav-item.active { background-color: var(--yt-surface-hover); font-weight: 500; }
         .nav-item i { width: 24px; margin-right: 16px; font-size: 20px; text-align: center; }
 
-        main { flex: 1; padding: 24px; overflow-y: auto; }
-        .section-title { font-size: 24px; font-weight: 700; margin-bottom: 24px; letter-spacing: -0.5px; }
+        /* Вкладка Shorts - в разработке */
+        .nav-item.disabled { opacity: 0.4; pointer-events: none; cursor: not-allowed; }
+
+        .nav-divider { border-top: 1px solid var(--yt-border); margin: 12px 0; }
+        
+        .nav-section-title { font-size: 16px; font-weight: 600; padding: 6px 12px; margin-bottom: 4px; display: flex; align-items: center; cursor: pointer; border-radius: 10px; }
+        .nav-section-title:hover { background-color: var(--yt-surface-hover); }
+        .nav-section-title i { margin-left: 6px; font-size: 12px; }
+
+        .nav-sub-item { display: flex; align-items: center; padding: 0 12px; height: 40px; cursor: pointer; border-radius: 10px; font-size: 14px; gap: 16px; }
+        .nav-sub-item:hover { background-color: var(--yt-surface-hover); }
+        .nav-avatar { width: 24px; height: 24px; border-radius: 50%; background-color: #444; object-fit: cover; flex-shrink: 0; }
+        .nav-sub-item span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex: 1; }
+
+        main { flex: 1; padding: 24px; overflow-y: auto; margin-left: 240px; margin-top: 56px; transition: var(--transition-smooth); } 
+        main.player-active { margin-top: 0; } 
+        .section-title { font-size: 20px; font-weight: 700; margin-bottom: 24px; }
+
+        /* Состояния скрытого Sidebar */
+        body.sidebar-hidden aside { transform: translateX(-100%); }
+        body.sidebar-hidden main { margin-left: 0; }
+        body.sidebar-hidden .category-chips-container { left: 0; width: 100%; }
 
         /* =========================================
            VIDEO GRID & CARDS
            ========================================= */
-        .video-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; row-gap: 36px; }
+        .video-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; row-gap: 40px; }
         .video-card { cursor: pointer; display: flex; flex-direction: column; gap: 12px; }
-        .thumbnail-container { position: relative; width: 100%; aspect-ratio: 16/9; border-radius: 16px; overflow: hidden; background-color: #000; }
-        .thumbnail { width: 100%; height: 100%; object-fit: cover; }
+        .thumbnail-container { position: relative; width: 100%; aspect-ratio: 16/9; border-radius: 12px; overflow: hidden; background-color: #222; }
+        .thumbnail { width: 100%; height: 100%; object-fit: cover; transition: border-radius 0.2s; }
+        .video-card:hover .thumbnail { border-radius: 0; }
 
-        .video-info { display: flex; gap: 12px; }
-        .channel-avatar { width: 36px; height: 36px; border-radius: 50%; background-color: var(--md-sys-color-surface-variant); display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 14px; flex-shrink: 0; overflow: hidden; }
+        .video-info { display: flex; gap: 12px; align-items: flex-start; }
+        .channel-avatar { width: 36px; height: 36px; border-radius: 50%; background-color: #333; flex-shrink: 0; overflow: hidden; }
         .channel-avatar img { width: 100%; height: 100%; object-fit: cover; }
-        .video-details { display: flex; flex-direction: column; }
-        .video-title { font-size: 15px; font-weight: 500; line-height: 1.4; margin-bottom: 4px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-        .channel-name, .video-meta { font-size: 13px; color: var(--md-sys-color-on-surface-variant); }
-        .info-message { grid-column: 1 / -1; text-align: center; padding: 64px 24px; color: var(--md-sys-color-on-surface-variant); font-size: 16px; line-height: 1.6; }
+        .video-details { display: flex; flex-direction: column; padding-right: 24px; position: relative; }
+        .video-title { font-size: 16px; font-weight: 500; line-height: 1.4; margin-bottom: 4px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; color: var(--yt-text-primary); }
+        .channel-name, .video-meta { font-size: 14px; color: var(--yt-text-secondary); line-height: 1.4; }
+        .channel-name { margin-top: 2px; }
+        .channel-name:hover { color: var(--yt-text-primary); }
+        .more-options { position: absolute; right: -10px; top: 0; opacity: 0; color: var(--yt-text-primary); padding: 4px; }
+        .video-card:hover .more-options { opacity: 1; }
+        .info-message { grid-column: 1 / -1; text-align: center; padding: 64px 24px; color: var(--yt-text-secondary); font-size: 16px; line-height: 1.6; }
 
         /* =========================================
-           NEW DESKTOP PLAYER VIEW (TWO COLUMNS)
+           PLAYER VIEW
            ========================================= */
-        .player-view { display: none; max-width: 1600px; margin: 0 auto; gap: 24px; align-items: flex-start; }
+        .player-view { display: none; max-width: 1600px; margin: 0 auto; gap: 24px; align-items: flex-start; padding-top: 24px;}
         .player-main { flex: 1; min-width: 0; }
         .player-sidebar { width: 400px; display: flex; flex-direction: column; gap: 16px; flex-shrink: 0; }
 
-        .btn-back { align-self: flex-start; background: transparent; border: none; color: var(--md-sys-color-primary); font-size: 14px; font-weight: 500; cursor: pointer; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: 20px; transition: var(--transition-smooth); }
-        .btn-back:hover { background-color: rgba(255,255,255,0.05); }
+        video { width: 100%; aspect-ratio: 16/9; background-color: #000; border-radius: 12px; outline: none; }
+        .player-title { font-size: 20px; font-weight: 700; margin-top: 12px; }
 
-        video { width: 100%; aspect-ratio: 16/9; background-color: #000; border-radius: 16px; outline: none; box-shadow: 0 4px 30px rgba(0,0,0,0.3); }
-        .player-title { font-size: 20px; font-weight: 700; margin-top: 16px; }
+        .player-actions-row { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; flex-wrap: wrap; gap: 16px; }
 
-        .player-actions-row { display: flex; justify-content: space-between; align-items: flex-start; margin-top: 12px; flex-wrap: wrap; gap: 16px; }
+        .player-channel-info { display: flex; align-items: center; gap: 12px; }
+        .player-channel-text { display: flex; flex-direction: column; margin-right: 12px;}
+        .player-channel-name { font-weight: 500; font-size: 16px; color: var(--yt-text-primary); }
+        .player-channel-subs { font-size: 12px; color: var(--yt-text-secondary); }
 
-        .player-channel-info { display: flex; align-items: center; gap: 14px; }
-        .player-channel-text { display: flex; flex-direction: column; }
-        .player-channel-name { font-weight: 700; font-size: 16px; color: var(--md-sys-color-on-background); }
-        .player-channel-subs { font-size: 12px; color: var(--md-sys-color-on-surface-variant); }
-
-        .btn-subscribe { border: none; padding: 0 20px; height: 36px; border-radius: 18px; font-weight: 500; font-size: 14px; cursor: pointer; transition: var(--transition-smooth); margin-left: 12px; }
-        .btn-subscribe.unsubscribed { background-color: var(--md-sys-color-on-background); color: var(--md-sys-color-background); }
-        .btn-subscribe.unsubscribed:hover { filter: brightness(0.9); }
-        .btn-subscribe.subscribed { background-color: var(--md-sys-color-surface-variant); color: var(--md-sys-color-on-background); border: 1px solid rgba(255,255,255,0.1); }
-        .btn-subscribe.subscribed:hover { background-color: rgba(255,255,255,0.15); }
+        .btn-subscribe { border: none; padding: 0 16px; height: 36px; border-radius: 18px; font-weight: 500; font-size: 14px; cursor: pointer; transition: var(--transition-smooth); }
+        .btn-subscribe.unsubscribed { background-color: var(--yt-text-primary); color: var(--yt-background); }
+        .btn-subscribe.unsubscribed:hover { background-color: #d9d9d9; }
+        .btn-subscribe.subscribed { background-color: var(--yt-chip-bg); color: var(--yt-text-primary); }
+        .btn-subscribe.subscribed:hover { background-color: var(--yt-chip-bg-hover); }
 
         .player-buttons { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
         .player-btn {
-            background-color: rgba(255,255,255,0.1); border: none; color: var(--md-sys-color-on-background);
+            background-color: var(--yt-chip-bg); border: none; color: var(--yt-text-primary);
             padding: 0 16px; height: 36px; border-radius: 18px; font-weight: 500; font-size: 14px;
             display: flex; align-items: center; gap: 8px; cursor: pointer; transition: var(--transition-smooth);
         }
-        .player-btn:hover { background-color: rgba(255,255,255,0.2); }
-        
-        /* Цвета активных кнопок */
-        .player-btn.active { color: var(--md-sys-color-primary); }
+        .player-btn:hover { background-color: var(--yt-chip-bg-hover); }
+        .player-btn.active { color: #3ea6ff; }
 
-        .player-btn-group { display: flex; background-color: rgba(255,255,255,0.1); border-radius: 18px; overflow: hidden; }
+        .player-btn-group { display: flex; background-color: var(--yt-chip-bg); border-radius: 18px; overflow: hidden; }
         .player-btn-group .player-btn { background: transparent; border-radius: 0; }
         .player-btn-group .player-btn:hover { background-color: rgba(255,255,255,0.1); }
         .player-btn-group .separator { width: 1px; background-color: rgba(255,255,255,0.2); margin: 6px 0; }
 
-        .player-description { margin-top: 16px; background-color: rgba(255,255,255,0.08); border-radius: 12px; padding: 12px; font-size: 14px; line-height: 1.5; color: var(--md-sys-color-on-background); }
-        .player-description-meta { font-weight: 700; margin-bottom: 4px; display: block; }
+        .player-description { margin-top: 16px; background-color: var(--yt-chip-bg); border-radius: 12px; padding: 12px; font-size: 14px; line-height: 1.5; color: var(--yt-text-primary); }
+        .player-description:hover { background-color: var(--yt-chip-bg-hover); cursor: pointer; }
+        .player-description-meta { font-weight: 500; margin-bottom: 4px; display: block; }
 
         /* Sidebar Suggested Cards */
-        .suggested-card { display: flex; gap: 12px; cursor: pointer; }
-        .suggested-thumb-wrap { position: relative; width: 168px; flex-shrink: 0; aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; background: #000; }
+        .suggested-card { display: flex; gap: 8px; cursor: pointer; margin-bottom: 8px;}
+        .suggested-thumb-wrap { position: relative; width: 168px; flex-shrink: 0; aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; background: #222; }
         .suggested-thumb-wrap img { width: 100%; height: 100%; object-fit: cover; }
         .suggested-details { display: flex; flex-direction: column; padding-right: 12px; }
         .suggested-title { font-size: 14px; font-weight: 500; line-height: 1.4; margin-bottom: 4px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-        .suggested-channel, .suggested-meta { font-size: 12px; color: var(--md-sys-color-on-surface-variant); }
+        .suggested-channel, .suggested-meta { font-size: 12px; color: var(--yt-text-secondary); }
 
         /* =========================================
            AUTH MODAL
            ========================================= */
-        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.6); backdrop-filter: blur(4px); z-index: 200; justify-content: center; align-items: center; }
-        .m3-dialog { background-color: var(--md-sys-color-surface); border-radius: 28px; width: 440px; padding: 36px; box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6); display: flex; flex-direction: column; position: relative; }
-        .auth-tabs { display: flex; border-bottom: 1px solid var(--md-sys-color-surface-variant); margin-bottom: 28px; }
-        .auth-tab { flex: 1; text-align: center; padding: 12px; cursor: pointer; font-weight: 500; font-size: 15px; color: var(--md-sys-color-on-surface-variant); position: relative; transition: var(--transition-smooth); }
-        .auth-tab.active { color: var(--md-sys-color-primary); }
-        .auth-tab.active::after { content: ''; position: absolute; bottom: -1px; left: 0; width: 100%; height: 3px; background-color: var(--md-sys-color-primary); border-radius: 3px 3px 0 0; }
-        .auth-form { display: none; flex-direction: column; gap: 20px; }
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.6); backdrop-filter: blur(2px); z-index: 200; justify-content: center; align-items: center; }
+        .m3-dialog { background-color: #212121; border-radius: 12px; width: 400px; padding: 24px; box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6); display: flex; flex-direction: column; position: relative; }
+        .auth-tabs { display: flex; border-bottom: 1px solid var(--yt-border); margin-bottom: 24px; }
+        .auth-tab { flex: 1; text-align: center; padding: 12px; cursor: pointer; font-weight: 500; font-size: 15px; color: var(--yt-text-secondary); position: relative; transition: var(--transition-smooth); }
+        .auth-tab.active { color: #3ea6ff; }
+        .auth-tab.active::after { content: ''; position: absolute; bottom: -1px; left: 0; width: 100%; height: 2px; background-color: #3ea6ff; }
+        .auth-form { display: none; flex-direction: column; gap: 16px; }
         .auth-form.active { display: flex; }
         .m3-field-container { position: relative; width: 100%; }
-        .m3-input { width: 100%; height: 56px; background-color: transparent; border: 1px solid var(--md-sys-color-outline); border-radius: 4px; padding: 0 16px; font-size: 16px; color: var(--md-sys-color-on-background); outline: none; transition: var(--transition-smooth); }
-        .m3-input:focus { border-color: var(--md-sys-color-primary); border-width: 2px; }
-        .m3-label { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--md-sys-color-on-surface-variant); transition: var(--transition-smooth); pointer-events: none; background-color: var(--md-sys-color-surface); padding: 0 4px; }
-        .m3-input:focus ~ .m3-label, .m3-input:not(:placeholder-shown) ~ .m3-label { top: 0; font-size: 12px; color: var(--md-sys-color-primary); }
-        .dialog-actions { display: flex; justify-content: flex-end; gap: 12px; margin-top: 32px; }
-        .btn-text { background: transparent; border: none; color: var(--md-sys-color-primary); padding: 0 16px; height: 40px; border-radius: 20px; font-weight: 500; cursor: pointer; transition: var(--transition-smooth); }
-        .btn-text:hover { background-color: rgba(168, 199, 250, 0.08); }
-        .btn-filled { background-color: var(--md-sys-color-primary); color: var(--md-sys-color-on-primary); border: none; padding: 0 24px; height: 40px; border-radius: 20px; font-weight: 500; cursor: pointer; transition: var(--transition-smooth); }
-        .btn-filled:hover { box-shadow: 0 1px 3px rgba(0,0,0,0.3); filter: brightness(1.05); }
-        .auth-error { color: var(--md-sys-color-error); font-size: 13px; display: none; }
+        .m3-input { width: 100%; height: 48px; background-color: transparent; border: 1px solid var(--yt-border); border-radius: 4px; padding: 0 12px; font-size: 16px; color: var(--yt-text-primary); outline: none; }
+        .m3-input:focus { border-color: #3ea6ff; }
+        .m3-label { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--yt-text-secondary); transition: var(--transition-smooth); pointer-events: none; background-color: #212121; padding: 0 4px; }
+        .m3-input:focus ~ .m3-label, .m3-input:not(:placeholder-shown) ~ .m3-label { top: 0; font-size: 12px; color: #3ea6ff; }
+        .dialog-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 24px; }
+        .btn-text { background: transparent; border: none; color: #3ea6ff; padding: 0 16px; height: 36px; border-radius: 18px; font-weight: 500; cursor: pointer; }
+        .btn-text:hover { background-color: rgba(62, 166, 255, 0.1); }
+        .btn-filled { background-color: #3ea6ff; color: #0f0f0f; border: none; padding: 0 16px; height: 36px; border-radius: 18px; font-weight: 500; cursor: pointer; }
+        .btn-filled:hover { background-color: #65b8ff; }
+        .auth-error { color: #ff4e45; font-size: 13px; display: none; }
 
         /* =========================================
-           MOBILE BOTTOM NAVIGATION 
-           ========================================= */
-        .bottom-nav { display: none; position: fixed; bottom: 0; left: 0; width: 100%; height: 60px; background-color: var(--md-sys-color-background); border-top: 1px solid rgba(255,255,255,0.08); z-index: 100; padding-bottom: env(safe-area-inset-bottom); }
-        .bottom-nav-item { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--md-sys-color-on-surface-variant); text-decoration: none; font-size: 10px; font-weight: 500; cursor: pointer; transition: var(--transition-smooth); }
-        .bottom-nav-item i { font-size: 20px; margin-bottom: 4px; }
-        .bottom-nav-item.active { color: var(--md-sys-color-primary); }
-
-        /* =========================================
-           АДАПТИВНОСТЬ
+           RESPONSIVE
            ========================================= */
         @media (max-width: 1300px) {
             .player-view { flex-direction: column; }
             .player-sidebar { width: 100%; flex-direction: row; flex-wrap: wrap; }
             .suggested-card { width: calc(50% - 8px); }
         }
-        @media (max-width: 1200px) { .video-grid { grid-template-columns: repeat(3, 1fr); } }
+        @media (max-width: 1100px) { .video-grid { grid-template-columns: repeat(3, 1fr); } }
+        
+        /* Мобильная версия и скрытие сайдбара */
         @media (max-width: 900px) {
             .video-grid { grid-template-columns: repeat(2, 1fr); }
-            aside { width: 72px; padding: 12px 4px; }
-            .nav-item { padding: 0; justify-content: center; border-radius: 50%; width: 48px; height: 48px; margin: 0 auto 12px; }
-            .nav-item span { display: none; }
-            .nav-item i { margin-right: 0; }
-            .suggested-card { width: 100%; }
+            body:not(.sidebar-hidden) aside { transform: translateX(0); width: 240px; box-shadow: 2px 0 10px rgba(0,0,0,0.5); z-index: 105;}
+            body:not(.sidebar-hidden) main { margin-left: 0; }
+            body:not(.sidebar-hidden) .category-chips-container { left: 0; width: 100%; }
         }
-        
-        /* ПРАВИЛА ДЛЯ ТЕЛЕФОНОВ */
-        @media (max-width: 600px) { 
-            aside { display: none; } 
-            .bottom-nav { display: flex; } 
-            .layout { height: calc(100vh - 64px - 60px); } 
-            header { padding: 0 16px; }
 
-            .mobile-search-btn, .mobile-search-close { display: block; }
-            .search-container { display: none; }
-            .search-container.active { display: flex !important; position: fixed; top: 0; left: 0; width: 100%; height: 64px; background-color: var(--md-sys-color-background); z-index: 110; padding: 0 16px; align-items: center; justify-content: center; }
-
-            main { padding: 16px 12px 80px 12px; } 
-            .section-title { font-size: 20px; margin-bottom: 16px; }
-            .video-grid { grid-template-columns: 1fr; gap: 16px; row-gap: 24px; } 
-            .video-card { gap: 10px; }
-            .thumbnail-container { border-radius: 12px; } 
-            .video-info { gap: 10px; }
-            .channel-avatar { width: 32px; height: 32px; } 
-            .video-title { font-size: 14px; margin-bottom: 2px; } 
-            .channel-name, .video-meta { font-size: 12px; } 
-
-            .player-title { font-size: 18px; }
-            .player-actions-row { flex-direction: column; }
-            .suggested-thumb-wrap { width: 120px; }
+        @media (max-width: 600px) {
+            .video-grid { grid-template-columns: 1fr; }
+            .search-container { margin-left: 10px; flex: 1; }
+            .search-bar-wrapper { margin-left: 0; }
+            .logo { font-size: 16px; }
+            .logo i { font-size: 20px; }
+            .category-chips-container { padding: 0 12px; }
+            main { padding: 12px; }
         }
     </style>
 </head>
-<body>
-
-    <header>
-        <div class="logo" onclick="changeRoute('home')">
-            <i class="fab fa-youtube" style="color:var(--youtube-red)"></i> EgorTube
+<body class="sidebar-hidden"> <header>
+        <div class="header-left">
+            <div class="menu-btn" onclick="toggleSidebar()"><i class="fas fa-bars"></i></div>
+            <div class="logo" onclick="changeRoute('home')">
+                <i class="fab fa-youtube" style="color:var(--youtube-red)"></i> EgorTube<sup>RU</sup>
+            </div>
         </div>
         
         <div class="search-container" id="searchContainer">
-            <button class="mobile-search-close" onclick="toggleMobileSearch(false)"><i class="fas fa-arrow-left"></i></button>
-            <div class="search-bar">
-                <input type="text" id="searchField" placeholder="Введите запрос" onkeyup="if(event.key === 'Enter') triggerSearchMobile()">
-                <button onclick="triggerSearchMobile()"><i class="fas fa-search"></i></button>
+            <div class="search-bar-wrapper">
+                <input type="text" id="searchField" placeholder="Введите запрос" onkeyup="if(event.key === 'Enter') triggerSearch()">
+                <button onclick="triggerSearch()"><i class="fas fa-search"></i></button>
             </div>
         </div>
 
-        <div style="display: flex; align-items: center; gap: 8px;">
-            <button class="mobile-search-btn" onclick="toggleMobileSearch(true)"><i class="fas fa-search"></i></button>
+        <div class="header-right">
+            <button class="icon-btn" onclick="toggleNotifications(event)"><i class="far fa-bell"></i></button>
+            <div class="notifications-dropdown" id="notificationsDropdown">
+                <i class="far fa-bell-slash"></i>
+                <span>Нет новых уведомлений</span>
+            </div>
 
             <div class="auth-zone">
-                <button class="auth-action-btn" id="loginBtn" onclick="openAuthModal()"><i class="far fa-user-circle"></i> Войти</button>
+                <button class="auth-action-btn" id="loginBtn" onclick="openAuthModal()"><i class="far fa-user-circle" style="font-size:18px;"></i> Войти</button>
                 <div class="user-profile-zone" id="profileZone" onclick="logout()">
-                    <span id="userNameDisplay" style="font-weight:500;">User</span>
                     <div class="user-avatar" id="avatarIcon">U</div>
                 </div>
             </div>
         </div>
     </header>
 
+    <div class="category-chips-container" id="categoryChips">
+        <div class="chip active" onclick="selectCategory(this, 'Все')">Все</div>
+        <div class="chip" onclick="selectCategory(this, 'Музыка')">Музыка</div>
+        <div class="chip" onclick="selectCategory(this, 'Видеоигры')">Видеоигры</div>
+        <div class="chip" onclick="selectCategory(this, 'Сейчас в эфире')">Сейчас в эфире</div>
+        <div class="chip" onclick="selectCategory(this, 'Minecraft')">Minecraft</div>
+        <div class="chip" onclick="selectCategory(this, 'Рэп')">Рэп</div>
+        <div class="chip" onclick="selectCategory(this, 'Экшен и приключения')">Экшен и приключения</div>
+        <div class="chip" onclick="selectCategory(this, 'Ремесла')">Ремесла</div>
+        <div class="chip" onclick="selectCategory(this, 'Недавно опубликованные')">Недавно опубликованные</div>
+    </div>
+
     <div class="layout">
         <aside>
             <div class="nav-item active" id="nav-home" onclick="changeRoute('home')"><i class="fas fa-home"></i> <span>Главная</span></div>
-            <div class="nav-item" id="nav-trending" onclick="changeRoute('trending')"><i class="fas fa-fire"></i> <span>В тренде</span></div>
-            <div class="nav-item" id="nav-subs" onclick="changeRoute('subs')"><i class="fas fa-play-circle"></i> <span>Подписки</span></div>
-            <div style="border-top: 1px solid var(--md-sys-color-surface-variant); margin: 12px 8px;"></div>
-            <div class="nav-item" id="nav-library" onclick="changeRoute('library')"><i class="fas fa-folder"></i> <span>Библиотека</span></div>
+            <div class="nav-item disabled" id="nav-shorts" title="В разработке"><i class="fas fa-bolt"></i> <span>Shorts</span></div>
+            
+            <div class="nav-divider"></div>
+            
+            <div class="nav-section-title">Подписки <i class="fas fa-chevron-right"></i></div>
+            
+            <div id="subsContainer">
+                <div style="padding: 0 12px; font-size: 13px; color: var(--yt-text-secondary);">Войдите, чтобы видеть подписки</div>
+            </div>
+
+            <div class="nav-divider"></div>
+            
+            <div class="nav-section-title" onclick="changeRoute('channel')">Вы <i class="fas fa-chevron-right"></i></div>
+            <div class="nav-item" id="nav-channel" onclick="changeRoute('channel')"><i class="far fa-user-circle"></i> <span>Мой канал</span></div>
             <div class="nav-item" id="nav-history" onclick="changeRoute('history')"><i class="fas fa-history"></i> <span>История</span></div>
-            <div style="border-top: 1px solid var(--md-sys-color-surface-variant); margin: 12px 8px;"></div>
-            <div class="nav-item" id="nav-channel" onclick="changeRoute('channel')"><i class="fas fa-user-edit"></i> <span>Мой канал</span></div>
+            <div class="nav-item" id="nav-library" onclick="changeRoute('library')"><i class="fas fa-folder"></i> <span>Плейлисты</span></div>
         </aside>
 
-        <main>
+        <main id="mainContainer">
             <h2 class="section-title" id="pageTitle" style="display: none;">Рекомендации</h2>
             
             <div class="video-grid" id="videoGrid"></div>
 
             <div class="player-view" id="playerView">
                 <div class="player-main">
-                    <button class="btn-back" onclick="closePlayer()"><i class="fas fa-arrow-left"></i> Назад</button>
                     <video id="mainVideoPlayer" controls></video>
                     <h2 class="player-title" id="mainPlayerTitle">Название видеоролика</h2>
                     
@@ -308,28 +354,21 @@
                             <button class="player-btn" id="btnShare" onclick="handleShare()">
                                 <i class="fas fa-share"></i> <span id="shareText">Поделиться</span>
                             </button>
+                            <button class="player-btn"><i class="fas fa-ellipsis-h"></i></button>
                         </div>
                     </div>
 
                     <div class="player-description">
-                        <span class="player-description-meta" id="playerDateViews">254 тыс. просмотров • 2 дня назад</span>
-                        Это пример описания к видеоролику. Здесь автор может оставлять ссылки, таймкоды и дополнительную информацию для зрителей.
+                        <span class="player-description-meta" id="playerDateViews">2 дня назад</span>
+                        Это пример описания к видеоролику. Здесь автор может оставлять ссылки, таймкоды и дополнительную информацию для зрителей. Развернуть...
                     </div>
                 </div>
 
                 <div class="player-sidebar" id="playerSidebar">
-                    </div>
+                </div>
             </div>
         </main>
     </div>
-
-    <nav class="bottom-nav" id="bottomNav">
-        <div class="bottom-nav-item active" id="bottom-nav-home" onclick="changeRoute('home')"><i class="fas fa-home"></i><span>Главная</span></div>
-        <div class="bottom-nav-item" id="bottom-nav-trending" onclick="changeRoute('trending')"><i class="fas fa-fire"></i><span>В тренде</span></div>
-        <div class="bottom-nav-item" id="bottom-nav-subs" onclick="changeRoute('subs')"><i class="fas fa-play-circle"></i><span>Подписки</span></div>
-        <div class="bottom-nav-item" id="bottom-nav-history" onclick="changeRoute('history')"><i class="fas fa-history"></i><span>История</span></div>
-        <div class="bottom-nav-item" id="bottom-nav-library" onclick="changeRoute('library')"><i class="fas fa-folder"></i><span>Медиатека</span></div>
-    </nav>
 
     <div class="modal-overlay" id="authModal">
         <div class="m3-dialog">
@@ -373,20 +412,19 @@
             return `${diffYears} лет назад`;
         }
 
-        // Вспомогательная функция для форматирования лайков (например: 12000 -> 12 тыс.)
         function formatNumber(num) {
             if (num >= 1000000) return (num / 1000000).toFixed(1) + " млн";
             if (num >= 1000) return (num / 1000).toFixed(1) + " тыс.";
             return num;
         }
 
-        // Добавил поле baseLikes в наши моковые данные
+        // Добавлено поле category для тестирования чипсов
         const mockVideos = [
-            { id: 1, title: "Egorkaegorov - Хочу быть как Егор | Премьера клипа", thumbnailUrl: "https://ia600802.us.archive.org/21/items/egorphotoegortubeprew/photo_2026-06-14_02-35-11.jpg", videoUrl: "https://ia600802.us.archive.org/21/items/egorphotoegortubeprew/wTiMdQP7aIVgk6Nok9Cz%2B5JpA5SVVpac.mp4", channelName: "Egorkaegorov", channelAvatar: "https://ia600802.us.archive.org/21/items/egorphotoegortubeprew/Gemini_Generated_Image_ubil5vubil5vubil.png", uploadDate: "2026-06-14", baseLikes: 14200 },
-            { id: 2, title: "Открытый кинематограф: За кулисами", thumbnailUrl: "-", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4", channelName: "Open Cinema", channelAvatar: "-", uploadDate: "2026-06-10", baseLikes: 840 },
-            { id: 3, title: "Игры будущего - Обзор новинок", thumbnailUrl: "-", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4", channelName: "Future Games", channelAvatar: "-", uploadDate: "2021-05-14", baseLikes: 5600 },
-            { id: 4, title: "Магия спецэффектов", thumbnailUrl: "-", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4", channelName: "VFX Lab", channelAvatar: "-", uploadDate: "2017-06-14", baseLikes: 120000 },
-            { id: 5, title: "Дикая природа: Лесные пожары", thumbnailUrl: "-", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4", channelName: "Discovery Nature", channelAvatar: "-", uploadDate: "2023-06-01", baseLikes: 3400 }
+            { id: 1, videoId: "ghockuq2bi3tka3keg00ro", title: "Egorkaegorov - Хочу быть как Егор | Премьера клипа", category: "Рэп", thumbnailUrl: "https://ia600802.us.archive.org/21/items/egorphotoegortubeprew/photo_2026-06-14_02-35-11.jpg", videoUrl: "https://ia600802.us.archive.org/21/items/egorphotoegortubeprew/wTiMdQP7aIVgk6Nok9Cz%2B5JpA5SVVpac.mp4", channelName: "Egorkaegorov", channelAvatar: "https://ia600802.us.archive.org/21/items/egorphotoegortubeprew/Gemini_Generated_Image_ubil5vubil5vubil.png", uploadDate: "2026-06-14", baseLikes: 14200, views: "1.5 млн просмотров" },
+            { id: 2, videoId: "b8x9mzq1opk3", title: "Открытый кинематограф: За кулисами", category: "Экшен и приключения", thumbnailUrl: "https://images.unsplash.com/photo-1601158935942-5225328a6163?w=600&h=337&fit=crop", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4", channelName: "Open Cinema", channelAvatar: "https://i.pravatar.cc/150?u=10", uploadDate: "2026-06-10", baseLikes: 840, views: "45 тыс. просмотров" },
+            { id: 3, videoId: "v4r7tyuiop0s", title: "Игры будущего - Обзор новинок", category: "Видеоигры", thumbnailUrl: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600&h=337&fit=crop", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4", channelName: "Future Games", channelAvatar: "https://i.pravatar.cc/150?u=11", uploadDate: "2021-05-14", baseLikes: 5600, views: "800 тыс. просмотров" },
+            { id: 4, videoId: "m9g1csfx89kl", title: "Магия спецэффектов", category: "Ремесла", thumbnailUrl: "https://images.unsplash.com/photo-1536240478700-b869070f9279?w=600&h=337&fit=crop", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4", channelName: "VFX Lab", channelAvatar: "https://i.pravatar.cc/150?u=12", uploadDate: "2017-06-14", baseLikes: 120000, views: "10 млн просмотров" },
+            { id: 5, videoId: "n4tur3f1r300", title: "Дикая природа: Лесные пожары", category: "Экшен и приключения", thumbnailUrl: "https://images.unsplash.com/photo-1504280741564-92434b9d0e2e?w=600&h=337&fit=crop", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4", channelName: "Discovery Nature", channelAvatar: "https://i.pravatar.cc/150?u=13", uploadDate: "2023-06-01", baseLikes: 3400, views: "120 тыс. просмотров" }
         ];
 
         let currentRoute = 'home';
@@ -394,82 +432,153 @@
         let watchHistory = [];
         let subscribedChannels = [];
         let searchKeyword = '';
+        let currentCategory = 'Все';
         let currentPlayingVideo = null;
 
         window.addEventListener('DOMContentLoaded', () => {
+            // Для десктопов убираем класс скрытия сайдбара
+            if (window.innerWidth > 900) { document.body.classList.remove('sidebar-hidden'); }
+            
             checkUserSession();
             renderLayout();
+            
+            const urlParams = new URLSearchParams(window.location.search);
+            const watchId = urlParams.get('watch');
+            if (watchId) {
+                const videoToPlay = mockVideos.find(v => v.videoId === watchId);
+                if (videoToPlay) { setTimeout(() => startPlayback(videoToPlay), 50); }
+            }
         });
 
-        function toggleMobileSearch(show) {
-            const searchContainer = document.getElementById('searchContainer');
-            if (show) { searchContainer.classList.add('active'); document.getElementById('searchField').focus(); } 
-            else { searchContainer.classList.remove('active'); }
+        // Toggle Sidebar
+        function toggleSidebar() {
+            document.body.classList.toggle('sidebar-hidden');
         }
 
-        function triggerSearchMobile() { triggerSearch(); toggleMobileSearch(false); }
+        // Toggle Notifications
+        function toggleNotifications(event) {
+            event.stopPropagation();
+            document.getElementById('notificationsDropdown').classList.toggle('active');
+        }
+
+        // Close notifications when clicking outside
+        document.addEventListener('click', (e) => {
+            const dropdown = document.getElementById('notificationsDropdown');
+            if(dropdown.classList.contains('active') && !dropdown.contains(e.target)) {
+                dropdown.classList.remove('active');
+            }
+        });
 
         function changeRoute(route) {
-            currentRoute = route; searchKeyword = ''; document.getElementById('searchField').value = ''; closePlayer();
+            currentRoute = route; searchKeyword = ''; document.getElementById('searchField').value = ''; 
+            currentCategory = 'Все'; updateCategoryChipsUI();
+            closePlayer();
             document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
             const activeNav = document.getElementById(`nav-${route}`);
             if (activeNav) activeNav.classList.add('active');
-
-            document.querySelectorAll('.bottom-nav-item').forEach(el => el.classList.remove('active'));
-            const activeBottomNav = document.getElementById(`bottom-nav-${route}`);
-            if (activeBottomNav) activeBottomNav.classList.add('active');
+            
+            // На мобилках закрываем сайдбар после клика по ссылке
+            if (window.innerWidth <= 900) { document.body.classList.add('sidebar-hidden'); }
 
             renderLayout();
         }
 
         function triggerSearch() { searchKeyword = document.getElementById('searchField').value.trim().toLowerCase(); closePlayer(); renderLayout(); }
 
+        // Фильтр по чипсам
+        function selectCategory(element, category) {
+            currentCategory = category;
+            updateCategoryChipsUI();
+            renderLayout();
+        }
+
+        function updateCategoryChipsUI() {
+            const chips = document.querySelectorAll('.chip');
+            chips.forEach(c => {
+                if(c.textContent === currentCategory) c.classList.add('active');
+                else c.classList.remove('active');
+            });
+        }
+
+        // Рендер динамического списка подписок
+        function renderSubscriptionsList() {
+            const container = document.getElementById('subsContainer');
+            container.innerHTML = '';
+            
+            if (!currentUser) {
+                container.innerHTML = '<div style="padding: 12px; font-size: 13px; color: var(--yt-text-secondary);">Войдите, чтобы видеть подписки</div>';
+                return;
+            }
+
+            if (subscribedChannels.length === 0) {
+                container.innerHTML = '<div style="padding: 12px; font-size: 13px; color: var(--yt-text-secondary);">У вас пока нет подписок</div>';
+                return;
+            }
+
+            // Находим аватарки из mockVideos
+            const channelMap = {};
+            mockVideos.forEach(v => channelMap[v.channelName] = v.channelAvatar);
+
+            subscribedChannels.forEach(ch => {
+                const avatarUrl = channelMap[ch] || 'https://i.pravatar.cc/150?u=' + Math.random();
+                container.innerHTML += `
+                    <div class="nav-sub-item">
+                        <img src="${avatarUrl}" class="nav-avatar"> 
+                        <span>${ch}</span> 
+                        <div class="live-indicator" style="display:none;"></div>
+                    </div>`;
+            });
+        }
+
         function renderLayout() {
             const grid = document.getElementById('videoGrid');
             const pageTitleEl = document.getElementById('pageTitle');
             grid.innerHTML = '';
             
-            const titles = { home: "", trending: "В тренде (Новинки)", subs: "Обновления подписок", library: "Ваша медиатека", history: "История просмотров", channel: "Настройки профиля" };
+            const titles = { home: "", trending: "В тренде", subs: "Новое", library: "Плейлисты", history: "История просмотра", channel: "Ваш канал" };
 
             if (currentRoute === 'channel' || currentPlayingVideo) { pageTitleEl.style.display = 'none'; } 
             else {
-                const titleText = searchKeyword ? `Результаты по запросу: "${searchKeyword}"` : titles[currentRoute];
+                const titleText = searchKeyword ? `Результаты поиска` : titles[currentRoute];
                 if (titleText) { pageTitleEl.textContent = titleText; pageTitleEl.style.display = 'block'; } 
                 else { pageTitleEl.style.display = 'none'; }
             }
             
             if (currentRoute === 'channel') {
                 if (!currentUser) {
-                    grid.innerHTML = `<div class="info-message"><i class="far fa-user-circle" style="font-size:40px;margin-bottom:16px;color:var(--md-sys-color-primary)"></i><br><strong>Войдите в аккаунт</strong><br>Чтобы настроить свой канал, необходимо авторизоваться.</div>`;
+                    grid.innerHTML = `<div class="info-message"><i class="far fa-user-circle" style="font-size:40px;margin-bottom:16px;"></i><br><strong>Войдите в аккаунт</strong><br>Чтобы настроить свой канал, необходимо авторизоваться.</div>`;
                     return;
                 }
                 grid.innerHTML = `
-                    <div style="grid-column: 1 / -1; background: var(--md-sys-color-surface-container); padding: 32px; border-radius: 16px;">
+                    <div style="grid-column: 1 / -1; background: #212121; padding: 32px; border-radius: 12px;">
                         <h3 style="margin-bottom: 24px; font-size: 20px;">Настройки канала</h3>
                         <div style="display: flex; flex-direction: column; gap: 20px; max-width: 480px;">
-                            <div class="m3-field-container"><label style="display:block; margin-bottom:8px; font-size: 14px; color: var(--md-sys-color-on-surface-variant)">Имя канала</label><input type="text" id="editChannelName" value="${currentUser.name}" class="m3-input" style="background: transparent; color: white;"></div>
-                            <div class="m3-field-container"><label style="display:block; margin-bottom:8px; font-size: 14px; color: var(--md-sys-color-on-surface-variant)">Прямая ссылка на аватар (URL)</label><input type="text" id="editChannelAvatar" value="${currentUser.avatarUrl}" class="m3-input" style="background: transparent; color: white;"></div>
-                            <button class="btn-filled" onclick="saveChannelSettings()" style="width: fit-content; margin-top: 12px;">Сохранить изменения</button>
-                            <div id="saveMsg" style="color: var(--md-sys-color-primary); display: none; font-size: 14px; font-weight: 500;">Настройки успешно сохранены!</div>
+                            <div class="m3-field-container"><label style="display:block; margin-bottom:8px; font-size: 14px; color: var(--yt-text-secondary)">Имя канала</label><input type="text" id="editChannelName" value="${currentUser.name}" class="m3-input"></div>
+                            <div class="m3-field-container"><label style="display:block; margin-bottom:8px; font-size: 14px; color: var(--yt-text-secondary)">Ссылка на аватар</label><input type="text" id="editChannelAvatar" value="${currentUser.avatarUrl}" class="m3-input"></div>
+                            <button class="btn-filled" onclick="saveChannelSettings()" style="width: fit-content; margin-top: 12px; border-radius: 4px;">Сохранить изменения</button>
+                            <div id="saveMsg" style="color: #3ea6ff; display: none; font-size: 14px; margin-top: 8px;">Настройки сохранены!</div>
                         </div>
                     </div>`;
                 return;
             }
 
             let filtered = [...mockVideos];
-            if (searchKeyword) { filtered = filtered.filter(v => v.title.toLowerCase().includes(searchKeyword) || v.channelName.toLowerCase().includes(searchKeyword)); } 
+            
+            // Фильтр по поиску
+            if (searchKeyword) { 
+                filtered = filtered.filter(v => v.title.toLowerCase().includes(searchKeyword) || v.channelName.toLowerCase().includes(searchKeyword)); 
+            } 
+            // Фильтр по чипсам (категориям)
+            else if (currentCategory !== 'Все') {
+                // Если у видео есть категория, фильтруем по ней, иначе ищем совпадение в названии
+                filtered = filtered.filter(v => v.category === currentCategory || v.title.includes(currentCategory));
+            }
             else {
-                if (currentRoute === 'trending') { filtered = filtered.sort((a, b) => new Date(b.uploadDate) - new Date(a.uploadDate)); } 
-                else if (currentRoute === 'subs') { 
-                    if (!currentUser) { grid.innerHTML = `<div class="info-message"><i class="far fa-user-circle" style="font-size:40px;margin-bottom:16px;color:var(--md-sys-color-primary)"></i><br><strong>Хотите проверить свои подписки?</strong><br>Войдите в аккаунт, чтобы просматривать публикации.</div>`; return; }
-                    filtered = filtered.filter(v => subscribedChannels.includes(v.channelName));
-                    if (filtered.length === 0) { grid.innerHTML = `<div class="info-message"><i class="fas fa-play-circle" style="font-size:40px;margin-bottom:16px;color:var(--md-sys-color-outline)"></i><br><strong>Здесь пока ничего нет</strong><br>Вы еще не подписались ни на один канал.</div>`; return; }
-                } 
-                else if (currentRoute === 'history') { filtered = watchHistory; } 
+                if (currentRoute === 'history') { filtered = watchHistory; } 
                 else if (currentRoute === 'library') { filtered = watchHistory.length > 0 ? watchHistory : mockVideos.slice(0, 2); }
             }
 
-            if (filtered.length === 0) { grid.innerHTML = `<div class="info-message">Ничего не найдено.</div>`; return; }
+            if (filtered.length === 0) { grid.innerHTML = `<div class="info-message">По данному запросу ничего не найдено.</div>`; return; }
 
             filtered.forEach(video => {
                 const card = document.createElement('div');
@@ -481,15 +590,15 @@
                         <div class="channel-avatar"><img src="${video.channelAvatar}"></div>
                         <div class="video-details">
                             <h3 class="video-title">${video.title}</h3>
-                            <span class="channel-name">${video.channelName}</span>
-                            <span class="video-meta">${timeAgo(video.uploadDate)}</span>
+                            <span class="channel-name">${video.channelName} <i class="fas fa-check-circle" style="font-size:10px; color:#aaa; margin-left:2px;"></i></span>
+                            <span class="video-meta">${video.views} • ${timeAgo(video.uploadDate)}</span>
+                            <i class="fas fa-ellipsis-v more-options"></i>
                         </div>
                     </div>`;
                 grid.appendChild(card);
             });
         }
 
-        // СОХРАНЕНИЕ НАСТРОЕК
         function saveChannelSettings() {
             const newName = document.getElementById('editChannelName').value.trim();
             const newAvatar = document.getElementById('editChannelAvatar').value.trim();
@@ -504,11 +613,12 @@
             }
         }
 
-        // ЛОГИКА ВОСПРОИЗВЕДЕНИЯ И ПЛЕЕРА
         function startPlayback(video) {
             currentPlayingVideo = video;
             document.getElementById('videoGrid').style.display = 'none';
             document.getElementById('pageTitle').style.display = 'none';
+            document.getElementById('categoryChips').style.display = 'none'; 
+            document.getElementById('mainContainer').classList.add('player-active');
             
             const playerView = document.getElementById('playerView');
             const player = document.getElementById('mainVideoPlayer');
@@ -519,12 +629,12 @@
             
             document.getElementById('playerChannelAvatar').innerHTML = `<img src="${video.channelAvatar}">`;
             document.getElementById('playerChannelName').textContent = video.channelName;
+            document.getElementById('playerDateViews').textContent = `${video.views} • ${timeAgo(video.uploadDate)}`;
             
-            const randomViews = Math.floor(Math.random() * 500) + 10;
-            document.getElementById('playerDateViews').textContent = `${randomViews} тыс. просмотров • ${timeAgo(video.uploadDate)}`;
-            
+            history.pushState({ videoId: video.videoId }, '', `?watch=${video.videoId}`);
+
             updateSubscribeButtonUI();
-            updateInteractionUI(); // Обновление лайков/дизлайков
+            updateInteractionUI();
             player.play();
 
             const sidebar = document.getElementById('playerSidebar');
@@ -539,7 +649,7 @@
                     <div class="suggested-details">
                         <h4 class="suggested-title">${s_video.title}</h4>
                         <span class="suggested-channel">${s_video.channelName}</span>
-                        <span class="suggested-meta">${timeAgo(s_video.uploadDate)}</span>
+                        <span class="suggested-meta">${s_video.views} • ${timeAgo(s_video.uploadDate)}</span>
                     </div>`;
                 sidebar.appendChild(s_card);
             });
@@ -555,19 +665,19 @@
             currentPlayingVideo = null;
             document.getElementById('playerView').style.display = 'none';
             document.getElementById('videoGrid').style.display = 'grid';
+            document.getElementById('categoryChips').style.display = 'flex';
+            document.getElementById('mainContainer').classList.remove('player-active');
+            
+            history.pushState(null, '', window.location.pathname);
             renderLayout();
         }
 
-        // =========================================
-        // ЛОГИКА КНОПОК ДЕЙСТВИЙ (Лайк, Дизлайк, Поделиться)
-        // =========================================
         function updateInteractionUI() {
             if (!currentPlayingVideo) return;
             const btnLike = document.getElementById('btnLike');
             const btnDislike = document.getElementById('btnDislike');
             const likeCountText = document.getElementById('likeCountText');
 
-            // Сброс стилей
             btnLike.classList.remove('active');
             btnDislike.classList.remove('active');
 
@@ -579,60 +689,45 @@
 
             let currentLikes = currentPlayingVideo.baseLikes;
 
-            if (userReaction === 'like') {
-                btnLike.classList.add('active');
-                currentLikes++;
-            } else if (userReaction === 'dislike') {
-                btnDislike.classList.add('active');
-            }
+            if (userReaction === 'like') { btnLike.classList.add('active'); currentLikes++; } 
+            else if (userReaction === 'dislike') { btnDislike.classList.add('active'); }
 
             likeCountText.textContent = formatNumber(currentLikes);
         }
 
         function handleReaction(type) {
-            if (!currentUser) { alert("Войдите в аккаунт, чтобы ставить оценки."); openAuthModal(); return; }
+            if (!currentUser) { openAuthModal(); return; }
             if (!currentPlayingVideo) return;
 
             const storageKey = `reactions_${currentUser.email}`;
             const reactions = JSON.parse(localStorage.getItem(storageKey) || "{}");
             const currentReaction = reactions[currentPlayingVideo.id];
 
-            if (currentReaction === type) {
-                delete reactions[currentPlayingVideo.id]; // Снимаем оценку
-            } else {
-                reactions[currentPlayingVideo.id] = type; // Ставим новую
-            }
+            if (currentReaction === type) { delete reactions[currentPlayingVideo.id]; } 
+            else { reactions[currentPlayingVideo.id] = type; }
 
             localStorage.setItem(storageKey, JSON.stringify(reactions));
             updateInteractionUI();
         }
 
         function handleShare() {
-            // Имитация копирования ссылки
             const shareText = document.getElementById('shareText');
             const originalText = shareText.textContent;
-            
-            // Записываем ссылку в буфер обмена
-            const dummyUrl = window.location.href;
-            navigator.clipboard.writeText(dummyUrl).then(() => {
+            navigator.clipboard.writeText(window.location.href).then(() => {
                 shareText.textContent = "Скопировано!";
                 setTimeout(() => { shareText.textContent = originalText; }, 2000);
-            }).catch(err => {
-                // Фолбэк если API не поддерживается
+            }).catch(() => {
                 shareText.textContent = "Скопировано!";
                 setTimeout(() => { shareText.textContent = originalText; }, 2000);
             });
         }
 
-        // =========================================
-        // ЛОГИКА ПОДПИСОК И АВТОРИЗАЦИИ
-        // =========================================
         function updateSubscribeButtonUI() {
             const btn = document.getElementById('subscribeBtn');
             if (!currentPlayingVideo) return;
 
             if (subscribedChannels.includes(currentPlayingVideo.channelName)) {
-                btn.textContent = "Вы подписаны";
+                btn.innerHTML = `<i class="fas fa-bell"></i> Вы подписаны <i class="fas fa-chevron-down" style="font-size:10px; margin-left:4px;"></i>`;
                 btn.className = "btn-subscribe subscribed";
             } else {
                 btn.textContent = "Подписаться";
@@ -642,18 +737,17 @@
         }
 
         function handleSubscriptionToggle(channelName) {
-            if (!currentUser) { alert("Пожалуйста, войдите в аккаунт, чтобы подписываться на каналы!"); openAuthModal(); return; }
+            if (!currentUser) { openAuthModal(); return; }
 
-            if (subscribedChannels.includes(channelName)) {
-                subscribedChannels = subscribedChannels.filter(name => name !== channelName);
-            } else {
-                subscribedChannels.push(channelName);
-            }
+            if (subscribedChannels.includes(channelName)) { subscribedChannels = subscribedChannels.filter(name => name !== channelName); } 
+            else { subscribedChannels.push(channelName); }
 
             localStorage.setItem(`subs_${currentUser.email}`, JSON.stringify(subscribedChannels));
             updateSubscribeButtonUI();
+            renderSubscriptionsList(); // Сразу обновляем список слева
         }
 
+        // Авторизация
         function openAuthModal() { document.getElementById('authModal').style.display = 'flex'; }
         function closeAuthModal() { document.getElementById('authModal').style.display = 'none'; resetAuthErrors(); }
         function switchAuthTab(type) {
@@ -670,13 +764,13 @@
             const email = document.getElementById('regEmail').value.trim();
             const password = document.getElementById('regPassword').value.trim();
 
-            if(!name || !email || !password) { document.getElementById('regError').textContent = "Пожалуйста, заполните все поля"; document.getElementById('regError').style.display = 'block'; return; }
-            if (!email.endsWith('@gmail.com')) { document.getElementById('regError').textContent = "Разрешена регистрация только с почтой @gmail.com"; document.getElementById('regError').style.display = 'block'; return; }
+            if(!name || !email || !password) { document.getElementById('regError').textContent = "Заполните все поля"; document.getElementById('regError').style.display = 'block'; return; }
+            if (!email.endsWith('@gmail.com')) { document.getElementById('regError').textContent = "Только @gmail.com"; document.getElementById('regError').style.display = 'block'; return; }
 
             let users = localStorage.getItem('et_users') ? JSON.parse(localStorage.getItem('et_users')) : [];
             if(users.some(u => u.email === email)) { document.getElementById('regError').textContent = "Этот Email уже занят!"; document.getElementById('regError').style.display = 'block'; return; }
 
-            const newUser = { name, email, password, avatarUrl: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&h=100&fit=crop" };
+            const newUser = { name, email, password, avatarUrl: "https://i.pravatar.cc/150?u=" + Math.random() };
             users.push(newUser); localStorage.setItem('et_users', JSON.stringify(users));
             currentUser = newUser; localStorage.setItem('et_current_user', JSON.stringify(newUser));
             checkUserSession(); closeAuthModal();
@@ -698,7 +792,6 @@
                 currentUser = JSON.parse(storedUser);
                 document.getElementById('loginBtn').style.display = 'none';
                 document.getElementById('profileZone').style.display = 'flex';
-                document.getElementById('userNameDisplay').textContent = currentUser.name;
                 document.getElementById('avatarIcon').innerHTML = `<img src="${currentUser.avatarUrl}">`;
                 
                 const storedSubs = localStorage.getItem(`subs_${currentUser.email}`);
@@ -707,11 +800,12 @@
                 watchHistory = storedHistory ? JSON.parse(storedHistory) : [];
             } else {
                 currentUser = null;
-                document.getElementById('loginBtn').style.display = 'block';
+                document.getElementById('loginBtn').style.display = 'flex';
                 document.getElementById('profileZone').style.display = 'none';
                 subscribedChannels = []; watchHistory = [];
             }
-            if (currentPlayingVideo) updateInteractionUI(); // Чтобы лайки сбросились при выходе
+            renderSubscriptionsList();
+            if (currentPlayingVideo) updateInteractionUI();
         }
 
         function logout() {
