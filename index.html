@@ -293,14 +293,35 @@
             .nav-item span { display: none; }
             .nav-item i { margin-right: 0; }
         }
+        
+        /* ПРАВИЛА ДЛЯ ТЕЛЕФОНОВ (Уменьшенные карточки) */
         @media (max-width: 600px) { 
-            .video-grid { grid-template-columns: 1fr; } 
             aside { display: none; } 
             .search-container { display: none; }
-            .bottom-nav { display: flex; } /* Показываем нижнюю панель на телефонах */
-            .layout { height: calc(100vh - 64px - 60px); } /* Вычитаем высоту хедера и нижней панели */
-            main { padding-bottom: 80px; } /* Доп. отступ снизу чтобы контент не перекрывался */
+            .bottom-nav { display: flex; } 
+            .layout { height: calc(100vh - 64px - 60px); } 
             header { padding: 0 16px; }
+
+            /* Делаем контент более компактным */
+            main { padding: 16px 12px 80px 12px; } 
+            .section-title { font-size: 20px; margin-bottom: 16px; }
+
+            /* Сетка и отступы между видео */
+            .video-grid { 
+                grid-template-columns: 1fr; 
+                gap: 16px; /* Меньше пустого места по бокам */
+                row-gap: 24px; /* Меньше расстояние по вертикали */
+            } 
+            
+            /* Сама карточка видео */
+            .video-card { gap: 10px; }
+            .thumbnail-container { border-radius: 12px; } /* Чуть меньше скругление */
+            
+            /* Инфо-блок под превью */
+            .video-info { gap: 10px; }
+            .channel-avatar { width: 32px; height: 32px; } /* Аватарка поменьше */
+            .video-title { font-size: 14px; margin-bottom: 2px; } /* Шрифт заголовка */
+            .channel-name, .video-meta { font-size: 12px; } /* Шрифт доп. инфы */
         }
     </style>
 </head>
