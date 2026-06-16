@@ -932,4 +932,78 @@
         }
     </script>
 </body>
+<div id="projectModal" class="project-modal">
+    <div class="project-box">
+        <h2>Проект приостановлен</h2>
+        <p>
+            Проект временно приостановлен на некоторое время.
+            Спасибо за понимание.
+        </p>
+
+        <button onclick="closeProjectModal()">ОК</button>
+    </div>
+</div>
+
+<style>
+.project-modal{
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.75);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99999;
+    backdrop-filter: blur(4px);
+}
+
+.project-box{
+    width: 400px;
+    max-width: 90%;
+    background: #212121;
+    border-radius: 16px;
+    padding: 24px;
+    color: #fff;
+    font-family: Roboto, sans-serif;
+    box-shadow: 0 10px 30px rgba(0,0,0,.5);
+}
+
+.project-box h2{
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.project-box p{
+    color: #aaa;
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.project-box button{
+    float: right;
+    border: none;
+    background: #3ea6ff;
+    color: #0f0f0f;
+    padding: 10px 22px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.project-box button:hover{
+    background: #65b8ff;
+}
+</style>
+
+<script>
+function closeProjectModal(){
+    document.getElementById("projectModal").style.display = "none";
+}
+
+window.onload = function(){
+    document.getElementById("projectModal").style.display = "flex";
+}
+</script>
 </html>
