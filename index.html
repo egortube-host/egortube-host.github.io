@@ -869,193 +869,81 @@
         }
     </script>
 </body>
-<!DOCTYPE html>
-<html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Сайт недоступен</title>
 
 <style>
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Roboto,sans-serif;
-}
-
-html,body{
-    width:100%;
-    height:100%;
-    overflow:hidden;
-}
-
 body{
 
-    background:
-    radial-gradient(circle at top left,#ff000025,transparent 35%),
-    radial-gradient(circle at bottom right,#3ea6ff30,transparent 35%),
-    linear-gradient(135deg,#0f0f0f,#181818);
+margin:0;
+
+height:100vh;
+
+background:#0f0f0f;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
 
 }
 
-#screen{
+.box{
 
-    position:fixed;
+width:700px;
 
-    inset:0;
+padding:65px;
 
-    display:flex;
+background:#212121;
 
-    justify-content:center;
+border-radius:25px;
 
-    align-items:center;
+box-shadow:
 
-    backdrop-filter:blur(20px);
+0 20px 60px rgba(0,0,0,.7);
 
-}
-
-.card{
-
-    width:720px;
-
-    max-width:92%;
-
-    padding:65px;
-
-    border-radius:40px;
-
-    background:rgba(255,255,255,.08);
-
-    backdrop-filter:blur(40px);
-
-    -webkit-backdrop-filter:blur(40px);
-
-    border:1px solid rgba(255,255,255,.12);
-
-    box-shadow:
-
-    0 20px 80px rgba(0,0,0,.6),
-
-    inset 0 1px 1px rgba(255,255,255,.25),
-
-    inset 0 -1px 1px rgba(255,255,255,.05);
-
-    text-align:center;
-
-    position:relative;
-
-    overflow:hidden;
-
-}
-
-.card::before{
-
-    content:"";
-
-    position:absolute;
-
-    width:350px;
-
-    height:350px;
-
-    background:rgba(255,255,255,.08);
-
-    border-radius:50%;
-
-    top:-180px;
-
-    right:-120px;
-
-    filter:blur(50px);
-
-}
-
-.card::after{
-
-    content:"";
-
-    position:absolute;
-
-    width:250px;
-
-    height:250px;
-
-    background:rgba(255,255,255,.05);
-
-    border-radius:50%;
-
-    bottom:-130px;
-
-    left:-90px;
-
-    filter:blur(45px);
-
-}
-
-.icon{
-
-    font-size:95px;
-
-    color:white;
-
-    opacity:.85;
-
-    margin-bottom:30px;
+text-align:center;
 
 }
 
 h1{
 
-    color:#fff;
+color:white;
 
-    font-size:48px;
-
-    font-weight:700;
+font-size:44px;
 
 }
 
 p{
 
-    margin-top:25px;
+color:#aaa;
 
-    color:#d0d0d0;
-
-    font-size:23px;
-
-    line-height:1.8;
+font-size:22px;
 
 }
 
 </style>
 
 </head>
+
 <body>
 
-<div id="screen">
+<div class="box">
 
-    <div class="card">
+<h1>Этот сайт недоступен</h1>
 
-        <div class="icon">⚠</div>
+<p>
 
-        <h1>Этот сайт недоступен</h1>
+Проект временно приостановлен.
 
-        <p>
+<br><br>
 
-            Проект временно приостановлен.
+Попробуйте позже.
 
-            <br><br>
-
-            Попробуйте зайти позже.
-
-        </p>
-
-    </div>
+</p>
 
 </div>
 
 </body>
-</html>
 </html>
