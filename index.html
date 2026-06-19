@@ -8,7 +8,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     
     <style>
-   
         :root {
             --yt-background: #0f0f0f;
             --yt-surface: #0f0f0f;
@@ -35,7 +34,6 @@
         ::-webkit-scrollbar-thumb { background: #717171; border-radius: 10px; }
         ::-webkit-scrollbar-thumb:hover { background: #a0a0a0; }
 
-      
         header {
             display: flex; justify-content: space-between; align-items: center; padding: 0 16px;
             height: 56px; background-color: var(--yt-background);
@@ -60,7 +58,6 @@
         .icon-btn { position: relative; width: 40px; height: 40px; border-radius: 50%; border: none; background: transparent; color: var(--yt-text-primary); font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
         .icon-btn:hover { background-color: var(--yt-surface-hover); }
 
-        
         .notifications-dropdown { display: none; position: absolute; top: 48px; right: 50px; background-color: #212121; border-radius: 12px; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.5); width: 300px; min-height: 150px; z-index: 200; flex-direction: column; align-items: center; justify-content: center; border: 1px solid var(--yt-border); }
         .notifications-dropdown.active { display: flex; }
         .notifications-dropdown i { font-size: 32px; color: var(--yt-text-secondary); margin-bottom: 12px; }
@@ -73,7 +70,6 @@
         .user-avatar { width: 32px; height: 32px; border-radius: 50%; background-color: #555; color: white; display: flex; justify-content: center; align-items: center; font-weight: bold; overflow: hidden; margin-left: 8px; }
         .user-avatar img { width: 100%; height: 100%; object-fit: cover; }
 
-       
         .category-chips-container {
             position: fixed; top: 56px; width: calc(100% - 240px); left: 240px; height: 56px;
             background-color: var(--yt-background); z-index: 99; display: flex; align-items: center;
@@ -88,7 +84,6 @@
         .chip:hover { background-color: var(--yt-chip-bg-hover); }
         .chip.active { background-color: var(--yt-chip-active-bg); color: var(--yt-chip-active-text); }
 
-    
         .layout { display: flex; margin-top: 56px; height: calc(100vh - 56px); }
         aside { width: 240px; background-color: var(--yt-background); padding: 12px; overflow-y: auto; flex-shrink: 0; position: fixed; height: calc(100vh - 56px); z-index: 90; transition: var(--transition-smooth); }
         aside::-webkit-scrollbar { width: 8px; }
@@ -104,9 +99,6 @@
         .nav-item.active { background-color: var(--yt-surface-hover); font-weight: 500; }
         .nav-item i { width: 24px; margin-right: 16px; font-size: 20px; text-align: center; }
 
-        
-        .nav-item.disabled { opacity: 0.4; pointer-events: none; cursor: not-allowed; }
-
         .nav-divider { border-top: 1px solid var(--yt-border); margin: 12px 0; }
         
         .nav-section-title { font-size: 16px; font-weight: 600; padding: 6px 12px; margin-bottom: 4px; display: flex; align-items: center; cursor: pointer; border-radius: 10px; }
@@ -120,14 +112,13 @@
 
         main { flex: 1; padding: 24px; overflow-y: auto; margin-left: 240px; margin-top: 56px; transition: var(--transition-smooth); } 
         main.player-active { margin-top: 0; } 
+        main.egors-active { margin: 0 0 0 240px; padding: 0; overflow: hidden; } /* Для центрирования Egors */
         .section-title { font-size: 20px; font-weight: 700; margin-bottom: 24px; }
 
-       
         body.sidebar-hidden aside { transform: translateX(-100%); }
         body.sidebar-hidden main { margin-left: 0; }
         body.sidebar-hidden .category-chips-container { left: 0; width: 100%; }
 
-        
         .video-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; row-gap: 40px; }
         .video-card { cursor: pointer; display: flex; flex-direction: column; gap: 12px; }
         .thumbnail-container { position: relative; width: 100%; aspect-ratio: 16/9; border-radius: 12px; overflow: hidden; background-color: #222; }
@@ -142,11 +133,9 @@
         .channel-name, .video-meta { font-size: 14px; color: var(--yt-text-secondary); line-height: 1.4; }
         .channel-name { margin-top: 2px; }
         .channel-name:hover { color: var(--yt-text-primary); }
-        .more-options { position: absolute; right: -10px; top: 0; opacity: 0; color: var(--yt-text-primary); padding: 4px; }
-        .video-card:hover .more-options { opacity: 1; }
         .info-message { grid-column: 1 / -1; text-align: center; padding: 64px 24px; color: var(--yt-text-secondary); font-size: 16px; line-height: 1.6; }
 
-       
+        /* Обычный плеер */
         .player-view { display: none; max-width: 1600px; margin: 0 auto; gap: 24px; align-items: flex-start; padding-top: 24px;}
         .player-main { flex: 1; min-width: 0; }
         .player-sidebar { width: 400px; display: flex; flex-direction: column; gap: 16px; flex-shrink: 0; }
@@ -185,7 +174,6 @@
         .player-description:hover { background-color: var(--yt-chip-bg-hover); cursor: pointer; }
         .player-description-meta { font-weight: 500; margin-bottom: 4px; display: block; }
 
-     
         .suggested-card { display: flex; gap: 8px; cursor: pointer; margin-bottom: 8px;}
         .suggested-thumb-wrap { position: relative; width: 168px; flex-shrink: 0; aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; background: #222; }
         .suggested-thumb-wrap img { width: 100%; height: 100%; object-fit: cover; }
@@ -193,7 +181,42 @@
         .suggested-title { font-size: 14px; font-weight: 500; line-height: 1.4; margin-bottom: 4px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
         .suggested-channel, .suggested-meta { font-size: 12px; color: var(--yt-text-secondary); }
 
+        /* ---- EGORS VIEW (SHORTS) ---- */
+        .egors-view { display: none; height: calc(100vh - 56px); width: 100%; justify-content: center; align-items: center; overflow: hidden; }
+        .egor-main-box { display: flex; align-items: flex-end; gap: 16px; height: 90%; max-height: 800px; position: relative; transition: transform 0.3s ease, opacity 0.3s ease; }
         
+        .egor-video-wrapper { 
+            position: relative; height: 100%; aspect-ratio: 9/16; 
+            background: #222; border-radius: 12px; overflow: hidden; 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+        
+        /* Делаем видео вертикальным */
+        .egor-video-wrapper video { width: 100%; height: 100%; object-fit: cover; border-radius: 12px; }
+
+        .egor-info-overlay {
+            position: absolute; bottom: 0; left: 0; width: 100%;
+            padding: 24px 16px 16px 16px;
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+            display: flex; flex-direction: column; gap: 10px;
+        }
+
+        .egor-channel-row { display: flex; align-items: center; gap: 10px; }
+        .egor-avatar { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; }
+        .egor-channel { font-size: 15px; font-weight: 500; color: #fff; }
+        .egor-subscribe-btn { background: #fff; color: #000; border: none; padding: 6px 12px; border-radius: 16px; font-weight: 500; font-size: 13px; cursor: pointer; transition: background 0.2s; }
+        .egor-subscribe-btn:hover { background: #e5e5e5; }
+        .egor-title { font-size: 15px; font-weight: 400; color: #fff; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+
+        /* Кнопки справа от видео (как на скриншоте) */
+        .egor-actions { display: flex; flex-direction: column; justify-content: flex-end; gap: 16px; height: 100%; padding-bottom: 16px; }
+        .egor-action-btn { display: flex; flex-direction: column; align-items: center; gap: 6px; color: #fff; cursor: pointer; }
+        .egor-icon-circle { width: 48px; height: 48px; border-radius: 50%; background: rgba(255,255,255,0.1); display: flex; justify-content: center; align-items: center; font-size: 20px; transition: background 0.2s; }
+        .egor-icon-circle:hover { background: rgba(255,255,255,0.2); }
+        .egor-action-btn span { font-size: 13px; font-weight: 500; }
+        .egor-icon-circle.active { color: #3ea6ff; }
+
+        /* Modal Auth */
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.6); backdrop-filter: blur(2px); z-index: 200; justify-content: center; align-items: center; }
         .m3-dialog { background-color: #212121; border-radius: 12px; width: 400px; padding: 24px; box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6); display: flex; flex-direction: column; position: relative; }
         .auth-tabs { display: flex; border-bottom: 1px solid var(--yt-border); margin-bottom: 24px; }
@@ -214,7 +237,6 @@
         .btn-filled:hover { background-color: #65b8ff; }
         .auth-error { color: #ff4e45; font-size: 13px; display: none; }
 
-        
         @media (max-width: 1300px) {
             .player-view { flex-direction: column; }
             .player-sidebar { width: 100%; flex-direction: row; flex-wrap: wrap; }
@@ -222,12 +244,14 @@
         }
         @media (max-width: 1100px) { .video-grid { grid-template-columns: repeat(3, 1fr); } }
         
-        
         @media (max-width: 900px) {
             .video-grid { grid-template-columns: repeat(2, 1fr); }
             body:not(.sidebar-hidden) aside { transform: translateX(0); width: 240px; box-shadow: 2px 0 10px rgba(0,0,0,0.5); z-index: 105;}
             body:not(.sidebar-hidden) main { margin-left: 0; }
             body:not(.sidebar-hidden) .category-chips-container { left: 0; width: 100%; }
+            .egor-main-box { width: 100%; height: 100%; gap: 8px; justify-content: center; }
+            .egor-actions { position: absolute; right: 10px; bottom: 80px; z-index: 10; padding: 0; height: auto; }
+            .egor-video-wrapper { width: 100%; max-width: none; border-radius: 0; }
         }
 
         @media (max-width: 600px) {
@@ -238,10 +262,12 @@
             .logo i { font-size: 20px; }
             .category-chips-container { padding: 0 12px; }
             main { padding: 12px; }
+            main.egors-active { padding: 0; }
         }
     </style>
 </head>
-<body class="sidebar-hidden"> <header>
+<body class="sidebar-hidden"> 
+    <header>
         <div class="header-left">
             <div class="menu-btn" onclick="toggleSidebar()"><i class="fas fa-bars"></i></div>
             <div class="logo" onclick="changeRoute('home')">
@@ -287,7 +313,7 @@
     <div class="layout">
         <aside>
             <div class="nav-item active" id="nav-home" onclick="changeRoute('home')"><i class="fas fa-home"></i> <span>Главная</span></div>
-            <div class="nav-item disabled" id="nav-shorts" title="В разработке"><i class="fas fa-bolt"></i> <span>Egors</span></div>
+            <div class="nav-item" id="nav-egors" onclick="changeRoute('egors')"><i class="fas fa-bolt"></i> <span>Egors</span></div>
             
             <div class="nav-divider"></div>
             
@@ -338,19 +364,58 @@
                             <button class="player-btn" id="btnShare" onclick="handleShare()">
                                 <i class="fas fa-share"></i> <span id="shareText">Поделиться</span>
                             </button>
-                            <button class="player-btn"><i class="fas fa-ellipsis-h"></i></button>
-                        </div>
+                            </div>
                     </div>
 
                     <div class="player-description">
                         <span class="player-description-meta" id="playerDateViews">2 дня назад</span>
-                        Это пример описания к видеоролику. Здесь автор может оставлять ссылки, таймкоды и дополнительную информацию для зрителей. Развернуть...
+                        Это пример описания к видеоролику. Развернуть...
                     </div>
                 </div>
 
                 <div class="player-sidebar" id="playerSidebar">
                 </div>
             </div>
+
+            <div class="egors-view" id="egorsView">
+                <div class="egor-main-box" id="egorMainBox">
+                    <div class="egor-video-wrapper">
+                        <video id="egorVideoPlayer" autoplay loop></video>
+                        <div class="egor-info-overlay">
+                            <div class="egor-channel-row">
+                                <img id="egorAvatar" src="" class="egor-avatar">
+                                <span id="egorChannelName">@Канал</span>
+                                <button class="egor-subscribe-btn">Подписаться</button>
+                            </div>
+                            <div class="egor-title" id="egorTitle">Название видео</div>
+                        </div>
+                    </div>
+
+                    <div class="egor-actions">
+                        <div class="egor-action-btn" onclick="toggleEgorLike()">
+                            <div class="egor-icon-circle" id="egorLikeBtn"><i class="fas fa-thumbs-up"></i></div>
+                            <span id="egorLikesCount">0</span>
+                        </div>
+                        <div class="egor-action-btn">
+                            <div class="egor-icon-circle"><i class="fas fa-thumbs-down"></i></div>
+                            <span>Не нравится</span>
+                        </div>
+                        <div class="egor-action-btn">
+                            <div class="egor-icon-circle"><i class="fas fa-comment-alt"></i></div>
+                            <span id="egorCommentsCount">120</span>
+                        </div>
+                        <div class="egor-action-btn" onclick="handleShare()">
+                            <div class="egor-icon-circle"><i class="fas fa-share"></i></div>
+                            <span>Поделиться</span>
+                        </div>
+                        <div class="egor-action-btn">
+                            <div class="egor-icon-circle"><i class="fas fa-random"></i></div>
+                            <span>Ремикс</span>
+                        </div>
+                        </div>
+                </div>
+            </div>
+            
         </main>
     </div>
 
@@ -397,18 +462,29 @@
         }
 
         function formatNumber(num) {
+            if (typeof num === 'string') return num;
             if (num >= 1000000) return (num / 1000000).toFixed(1) + " млн";
             if (num >= 1000) return (num / 1000).toFixed(1) + " тыс.";
             return num;
         }
 
-       
         const mockVideos = [
-            { id: 1, videoId: "ghockuq2bi3tka3keg00ro", title: "Egorkaegorov - Хочу быть как Егор | Премьера клипа", category: "Музыка", thumbnailUrl: "https://ia600802.us.archive.org/21/items/egorphotoegortubeprew/photo_2026-06-14_02-35-11.jpg", videoUrl: "https://ia600802.us.archive.org/21/items/egorphotoegortubeprew/wTiMdQP7aIVgk6Nok9Cz%2B5JpA5SVVpac.mp4", channelName: "Egorkaegorov", channelAvatar: "https://ia600802.us.archive.org/21/items/egorphotoegortubeprew/Gemini_Generated_Image_ubil5vubil5vubil.png", uploadDate: "2026-06-14", baseLikes: 00000, views: "нет подписчиков" },
-            { id: 2, videoId: "b8x9mzq1opk3", title: "Egorkaegorov - Life Goes On (feat. Ty P.Diddy $ign) [Lyric Video]", category: "Музыка", thumbnailUrl: "https://ia600802.us.archive.org/21/items/egorphotoegortubeprew/photo_2026-06-20_01-14-29.jpg", videoUrl: "https://ia601601.us.archive.org/22/items/egorkaegorov-life-goes-on-lyric-video/egorkaegorov%20-%20Life%20Goes%20On%20%5BLyric%20Video%5D.mp4", channelName: "Egorkaegorov", channelAvatar: "https://ia600802.us.archive.org/21/items/egorphotoegortubeprew/Gemini_Generated_Image_ubil5vubil5vubil.png", uploadDate: "2026-20-06", baseLikes: 000, views: "нет подписчиков" },
-            { id: 3, videoId: "v4r7tyuiop0s", title: "Игры будущего - Обзор новинок", category: "Видеоигры", thumbnailUrl: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600&h=337&fit=crop", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4", channelName: "Future Games", channelAvatar: "https://i.pravatar.cc/150?u=11", uploadDate: "2021-05-14", baseLikes: 0000, views: "нет подписчиков" },
-            { id: 4, videoId: "m9g1csfx89kl", title: "alonmesk - PIDORSKY PIDORAS", category: "Музыка", thumbnailUrl: "https://i.ytimg.com/vi/XGE3Gtpvs24/hqdefault.jpg?sqp=-oaymwEnCNACELwBSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLDVBy8_qq0htXncw7XCzPzBWZfPgQ", videoUrl: "https://ia600802.us.archive.org/21/items/egorphotoegortubeprew/alonmesk%20-%20PIDORSKY%20PIDORAS.mp4", channelName: "alonmesk", channelAvatar: "https://yt3.ggpht.com/TIE0EqOVTVn1JHv4JzHSzD2juqiRHBlV3ZT_GfKKooQ0br_EB5lv2OWUU91wgIObi9R7TSIWOg=s48-c-k-c0x00ffffff-no-rj", uploadDate: "2025-11-04", baseLikes: 000000, views: "нет подписчиков" },
-            { id: 5, videoId: "n4tur3f1r300", title: "Дикая природа: Лесные пожары", category: "Экшен и приключения", thumbnailUrl: "https://images.unsplash.com/photo-1504280741564-92434b9d0e2e?w=600&h=337&fit=crop", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4", channelName: "Discovery Nature", channelAvatar: "https://i.pravatar.cc/150?u=13", uploadDate: "2023-06-01", baseLikes: 0000, views: "нет подписчиков" }
+            { id: 1, videoId: "ghockuq2bi3tka3keg00ro", title: "Egorkaegorov - Хочу быть как Егор | Премьера клипа", category: "Музыка", thumbnailUrl: "https://ia600802.us.archive.org/21/items/egorphotoegortubeprew/photo_2026-06-14_02-35-11.jpg", videoUrl: "https://ia600802.us.archive.org/21/items/egorphotoegortubeprew/wTiMdQP7aIVgk6Nok9Cz%2B5JpA5SVVpac.mp4", channelName: "Egorkaegorov", channelAvatar: "https://ia600802.us.archive.org/21/items/egorphotoegortubeprew/Gemini_Generated_Image_ubil5vubil5vubil.png", uploadDate: "2026-06-14", baseLikes: 0, views: "нет подписчиков" },
+            { id: 2, videoId: "b8x9mzq1opk3", title: "Egorkaegorov - Life Goes On (feat. Ty P.Diddy $ign) [Lyric Video]", category: "Музыка", thumbnailUrl: "https://ia600802.us.archive.org/21/items/egorphotoegortubeprew/photo_2026-06-20_01-14-29.jpg", videoUrl: "https://ia601601.us.archive.org/22/items/egorkaegorov-life-goes-on-lyric-video/egorkaegorov%20-%20Life%20Goes%20On%20%5BLyric%20Video%5D.mp4", channelName: "Egorkaegorov", channelAvatar: "https://ia600802.us.archive.org/21/items/egorphotoegortubeprew/Gemini_Generated_Image_ubil5vubil5vubil.png", uploadDate: "2026-06-20", baseLikes: 0, views: "нет подписчиков" },
+            { id: 3, videoId: "v4r7tyuiop0s", title: "Игры будущего - Обзор говна", category: "Видеоигры", thumbnailUrl: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600&h=337&fit=crop", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4", channelName: "Future Games", channelAvatar: "https://i.pravatar.cc/150?u=11", uploadDate: "2021-05-14", baseLikes: 0, views: "нет подписчиков" },
+            { id: 4, videoId: "m9g1csfx89kl", title: "alonmesk - PIDORSKY PIDORAS", category: "Музыка", thumbnailUrl: "https://i.ytimg.com/vi/XGE3Gtpvs24/hqdefault.jpg?sqp=-oaymwEnCNACELwBSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLDVBy8_qq0htXncw7XCzPzBWZfPgQ", videoUrl: "https://ia600802.us.archive.org/21/items/egorphotoegortubeprew/alonmesk%20-%20PIDORSKY%20PIDORAS.mp4", channelName: "alonmesk", channelAvatar: "https://yt3.ggpht.com/TIE0EqOVTVn1JHv4JzHSzD2juqiRHBlV3ZT_GfKKooQ0br_EB5lv2OWUU91wgIObi9R7TSIWOg=s48-c-k-c0x00ffffff-no-rj", uploadDate: "2025-11-04", baseLikes: 0, views: "нет подписчиков" },
+            { id: 5, videoId: "n4tur3f1r300", title: "неДикая природа: бебе пожары", category: "Экшен и приключения", thumbnailUrl: "https://images.unsplash.com/photo-1504280741564-92434b9d0e2e?w=600&h=337&fit=crop", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4", channelName: "Discovery Nature", channelAvatar: "https://i.pravatar.cc/150?u=13", uploadDate: "2023-06-01", baseLikes: 0, views: "нет подписчиков" }
+        ];
+
+        // бляяяяяяяяя Egors код тут 
+        const mockEgors = [
+            { videoId: "IRRGLyoNIqg", title: "Когда батя попросил найти песню", channelName: "@EgorEgora", channelAvatar: "https://ia600802.us.archive.org/21/items/egorphotoegortubeprew/Gemini_Generated_Image_ubil5vubil5vubil.png", videoUrl: "https://ia601601.us.archive.org/22/items/egorkaegorov-life-goes-on-lyric-video/doc_2026-06-11_16-36-41%20%281%29%20%28online-video-cutter.com%29.mp4", likes: "0", comments: 000 },
+            { videoId: "aB3cD4eF5gH", title: "Фокус с появлением денег💵", channelName: "@NarezkiEgora", channelAvatar: "https://ia600802.us.archive.org/21/items/egorphotoegortubeprew/Gemini_Generated_Image_ubil5vubil5vubil.png", videoUrl: "https://ia601601.us.archive.org/22/items/egorkaegorov-life-goes-on-lyric-video/%D1%84%D0%BE%D0%BA%D1%83%D1%81.mp4", likes: "0", comments: 00 },
+            { videoId: "xY9zZ8wV7uT", title: "Егорович смотрит: Великая реп битва ", channelName: "@NarezkiEgora", channelAvatar: "https://ia600802.us.archive.org/21/items/egorphotoegortubeprew/Gemini_Generated_Image_ubil5vubil5vubil.png", videoUrl: "https://ia601601.us.archive.org/22/items/egorkaegorov-life-goes-on-lyric-video/%D0%9D%D0%B0%D1%80%D0%B5%D0%B7%D0%BA%D0%B0%20%D0%B5%D0%B3%D0%BE%D1%80.mp4", likes: "0", comments: 00 },
+            { videoId: "pQ1rR2sS3tU", title: "Epic пепик ааааа", channelName: "@GayMaster", channelAvatar: "https://i.pravatar.cc/150?u=24", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4", likes: "0", comments: 0000 },
+            { videoId: "mN5oO6pP7qQ", title: "Qорлпорлопоп", channelName: "@sdfgyr", channelAvatar: "https://i.pravatar.cc/150?u=25", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4", likes: "0", comments: 0000 },
+            { videoId: "jK8lL9mM0nN", title: "Dрвпрвапрапрвапрвапррпа", channelName: "@sdjjfg", channelAvatar: "https://i.pravatar.cc/150?u=26", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4", likes: "0", comments: 0 },
+            { videoId: "hI1jJ2kK3lL", title: "врпаааааа", channelName: "@dsgd", channelAvatar: "https://i.pravatar.cc/150?u=27", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4", likes: "0", comments: 0 }
         ];
 
         let currentRoute = 'home';
@@ -418,34 +494,47 @@
         let searchKeyword = '';
         let currentCategory = 'Все';
         let currentPlayingVideo = null;
+        
+        let currentEgorIndex = 0;
+        let isEgorScrolling = false;
 
         window.addEventListener('DOMContentLoaded', () => {
-            
             if (window.innerWidth > 900) { document.body.classList.remove('sidebar-hidden'); }
             
             checkUserSession();
-            renderLayout();
             
+            // Парсинг ссылок: обычные видео (?watch=) и Egors (/egors/ID или ?egors=ID)
+            const path = window.location.pathname;
             const urlParams = new URLSearchParams(window.location.search);
             const watchId = urlParams.get('watch');
+            const egorsParam = urlParams.get('egors');
+
             if (watchId) {
                 const videoToPlay = mockVideos.find(v => v.videoId === watchId);
                 if (videoToPlay) { setTimeout(() => startPlayback(videoToPlay), 50); }
+                renderLayout();
+            } else if (path.includes('/egors/')) {
+                const parts = path.split('/egors/');
+                const egorId = parts[1].split('?')[0]; // Очистка от мусора
+                const eIdx = mockEgors.findIndex(e => e.videoId === egorId);
+                if (eIdx !== -1) currentEgorIndex = eIdx;
+                setTimeout(() => changeRoute('egors'), 50);
+            } else if (egorsParam) {
+                const eIdx = mockEgors.findIndex(e => e.videoId === egorsParam);
+                if (eIdx !== -1) currentEgorIndex = eIdx;
+                setTimeout(() => changeRoute('egors'), 50);
+            } else {
+                renderLayout();
             }
         });
 
-       
-        function toggleSidebar() {
-            document.body.classList.toggle('sidebar-hidden');
-        }
+        function toggleSidebar() { document.body.classList.toggle('sidebar-hidden'); }
 
-       
         function toggleNotifications(event) {
             event.stopPropagation();
             document.getElementById('notificationsDropdown').classList.toggle('active');
         }
 
-        
         document.addEventListener('click', (e) => {
             const dropdown = document.getElementById('notificationsDropdown');
             if(dropdown.classList.contains('active') && !dropdown.contains(e.target)) {
@@ -454,27 +543,42 @@
         });
 
         function changeRoute(route) {
-            currentRoute = route; searchKeyword = ''; document.getElementById('searchField').value = ''; 
+            currentRoute = route; 
+            searchKeyword = ''; document.getElementById('searchField').value = ''; 
             currentCategory = 'Все'; updateCategoryChipsUI();
-            closePlayer();
+            
+            closePlayer(); // Закрываем обычный плеер
+            
+            const egorPlayer = document.getElementById('egorVideoPlayer');
+            if (egorPlayer && route !== 'egors') { egorPlayer.pause(); } // Ставим паузу на egors, если уходим оттуда
+
             document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
             const activeNav = document.getElementById(`nav-${route}`);
             if (activeNav) activeNav.classList.add('active');
             
-            
             if (window.innerWidth <= 900) { document.body.classList.add('sidebar-hidden'); }
 
-            renderLayout();
+            const mainContainer = document.getElementById('mainContainer');
+            if (route === 'egors') {
+                document.getElementById('videoGrid').style.display = 'none';
+                document.getElementById('categoryChips').style.display = 'none';
+                document.getElementById('pageTitle').style.display = 'none';
+                document.getElementById('egorsView').style.display = 'flex';
+                mainContainer.classList.add('egors-active');
+                
+                loadEgor(currentEgorIndex);
+            } else {
+                document.getElementById('egorsView').style.display = 'none';
+                document.getElementById('videoGrid').style.display = 'grid';
+                document.getElementById('categoryChips').style.display = 'flex';
+                mainContainer.classList.remove('egors-active');
+                renderLayout();
+            }
         }
 
         function triggerSearch() { searchKeyword = document.getElementById('searchField').value.trim().toLowerCase(); closePlayer(); renderLayout(); }
 
-       
-        function selectCategory(element, category) {
-            currentCategory = category;
-            updateCategoryChipsUI();
-            renderLayout();
-        }
+        function selectCategory(element, category) { currentCategory = category; updateCategoryChipsUI(); renderLayout(); }
 
         function updateCategoryChipsUI() {
             const chips = document.querySelectorAll('.chip');
@@ -484,7 +588,6 @@
             });
         }
 
-        
         function renderSubscriptionsList() {
             const container = document.getElementById('subsContainer');
             container.innerHTML = '';
@@ -493,13 +596,11 @@
                 container.innerHTML = '<div style="padding: 12px; font-size: 13px; color: var(--yt-text-secondary);">Войдите, чтобы видеть подписки</div>';
                 return;
             }
-
             if (subscribedChannels.length === 0) {
                 container.innerHTML = '<div style="padding: 12px; font-size: 13px; color: var(--yt-text-secondary);">У вас пока нет подписок</div>';
                 return;
             }
 
-            
             const channelMap = {};
             mockVideos.forEach(v => channelMap[v.channelName] = v.channelAvatar);
 
@@ -509,12 +610,13 @@
                     <div class="nav-sub-item">
                         <img src="${avatarUrl}" class="nav-avatar"> 
                         <span>${ch}</span> 
-                        <div class="live-indicator" style="display:none;"></div>
                     </div>`;
             });
         }
 
         function renderLayout() {
+            if (currentRoute === 'egors') return; // Если мы в Egors, сетка не нужна
+
             const grid = document.getElementById('videoGrid');
             const pageTitleEl = document.getElementById('pageTitle');
             grid.innerHTML = '';
@@ -547,16 +649,8 @@
             }
 
             let filtered = [...mockVideos];
-            
-            
-            if (searchKeyword) { 
-                filtered = filtered.filter(v => v.title.toLowerCase().includes(searchKeyword) || v.channelName.toLowerCase().includes(searchKeyword)); 
-            } 
-           
-            else if (currentCategory !== 'Все') {
-               
-                filtered = filtered.filter(v => v.category === currentCategory || v.title.includes(currentCategory));
-            }
+            if (searchKeyword) { filtered = filtered.filter(v => v.title.toLowerCase().includes(searchKeyword) || v.channelName.toLowerCase().includes(searchKeyword)); } 
+            else if (currentCategory !== 'Все') { filtered = filtered.filter(v => v.category === currentCategory || v.title.includes(currentCategory)); }
             else {
                 if (currentRoute === 'history') { filtered = watchHistory; } 
                 else if (currentRoute === 'library') { filtered = watchHistory.length > 0 ? watchHistory : mockVideos.slice(0, 2); }
@@ -574,29 +668,95 @@
                         <div class="channel-avatar"><img src="${video.channelAvatar}"></div>
                         <div class="video-details">
                             <h3 class="video-title">${video.title}</h3>
-                            <span class="channel-name">${video.channelName} <i class="fas fa-check-circle" style="font-size:10px; color:#aaa; margin-left:2px;"></i></span>
+                            <span class="channel-name">${video.channelName}</span>
                             <span class="video-meta">${video.views} • ${timeAgo(video.uploadDate)}</span>
-                            <i class="fas fa-ellipsis-v more-options"></i>
                         </div>
                     </div>`;
                 grid.appendChild(card);
             });
         }
 
-        function saveChannelSettings() {
-            const newName = document.getElementById('editChannelName').value.trim();
-            const newAvatar = document.getElementById('editChannelAvatar').value.trim();
-            if (newName && newAvatar) {
-                currentUser.name = newName; currentUser.avatarUrl = newAvatar;
-                localStorage.setItem('et_current_user', JSON.stringify(currentUser));
-                let users = JSON.parse(localStorage.getItem('et_users')) || [];
-                const userIndex = users.findIndex(u => u.email === currentUser.email);
-                if (userIndex !== -1) { users[userIndex] = currentUser; localStorage.setItem('et_users', JSON.stringify(users)); }
-                checkUserSession(); 
-                const msg = document.getElementById('saveMsg'); msg.style.display = 'block'; setTimeout(() => msg.style.display = 'none', 3000);
-            }
+        // ---- Логика плеера Egors (Бесконечная лента) ----
+        function loadEgor(index) {
+            const egor = mockEgors[index];
+            const player = document.getElementById('egorVideoPlayer');
+            
+            player.src = egor.videoUrl;
+            document.getElementById('egorAvatar').src = egor.channelAvatar;
+            document.getElementById('egorChannelName').textContent = egor.channelName;
+            document.getElementById('egorTitle').textContent = egor.title;
+            document.getElementById('egorLikesCount').textContent = egor.likes;
+            document.getElementById('egorCommentsCount').textContent = egor.comments;
+            
+            // Сбрасываем лайк
+            document.getElementById('egorLikeBtn').classList.remove('active');
+
+            // Система ссылок (как в ютубе /egors/ID)
+            try {
+                // Если файл запущен локально (file://), лучше использовать ?egors=, чтобы не сломать путь
+                const isLocal = window.location.protocol === 'file:';
+                const nextUrl = isLocal ? `?egors=${egor.videoId}` : `/egors/${egor.videoId}`;
+                window.history.pushState(null, '', nextUrl);
+            } catch (e) { console.warn("History API block on local files"); }
+
+            player.play().catch(e => console.log("Autoplay prevented:", e));
         }
 
+        function slideEgor(direction) {
+            if (isEgorScrolling) return;
+            isEgorScrolling = true;
+            
+            const mainBox = document.getElementById('egorMainBox');
+            
+            // Быстрая анимация "свайпа"
+            mainBox.style.opacity = '0';
+            mainBox.style.transform = direction === 'up' ? 'translateY(-50px)' : 'translateY(50px)';
+            
+            setTimeout(() => {
+                if (direction === 'up') {
+                    currentEgorIndex = (currentEgorIndex + 1) % mockEgors.length;
+                } else {
+                    currentEgorIndex = (currentEgorIndex - 1 + mockEgors.length) % mockEgors.length;
+                }
+                
+                loadEgor(currentEgorIndex);
+                
+                mainBox.style.transition = 'none';
+                mainBox.style.transform = direction === 'up' ? 'translateY(50px)' : 'translateY(-50px)';
+                
+                // Принудительный рендер перед включением транзакции обратно
+                void mainBox.offsetWidth;
+                
+                mainBox.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
+                mainBox.style.opacity = '1';
+                mainBox.style.transform = 'translateY(0)';
+                
+                setTimeout(() => { isEgorScrolling = false; }, 300);
+            }, 200);
+        }
+
+        // Управление колесиком
+        document.getElementById('egorsView').addEventListener('wheel', (e) => {
+            if (currentRoute !== 'egors') return;
+            if (e.deltaY > 0) { slideEgor('up'); } 
+            else if (e.deltaY < 0) { slideEgor('down'); }
+        });
+
+        // Управление стрелочками
+        document.addEventListener('keydown', (e) => {
+            if (currentRoute !== 'egors') return;
+            // Блокируем стандартную прокрутку страницы от стрелок
+            if (e.key === 'ArrowDown' || e.key === 'ArrowUp') e.preventDefault(); 
+
+            if (e.key === 'ArrowDown') slideEgor('up');
+            else if (e.key === 'ArrowUp') slideEgor('down');
+        });
+
+        function toggleEgorLike() {
+            document.getElementById('egorLikeBtn').classList.toggle('active');
+        }
+
+        // ---- Обычный плеер ----
         function startPlayback(video) {
             currentPlayingVideo = video;
             document.getElementById('videoGrid').style.display = 'none';
@@ -648,12 +808,7 @@
             if (player) { player.pause(); player.src = ''; }
             currentPlayingVideo = null;
             document.getElementById('playerView').style.display = 'none';
-            document.getElementById('videoGrid').style.display = 'grid';
-            document.getElementById('categoryChips').style.display = 'flex';
             document.getElementById('mainContainer').classList.remove('player-active');
-            
-            history.pushState(null, '', window.location.pathname);
-            renderLayout();
         }
 
         function updateInteractionUI() {
@@ -672,7 +827,6 @@
             }
 
             let currentLikes = currentPlayingVideo.baseLikes;
-
             if (userReaction === 'like') { btnLike.classList.add('active'); currentLikes++; } 
             else if (userReaction === 'dislike') { btnDislike.classList.add('active'); }
 
@@ -695,15 +849,10 @@
         }
 
         function handleShare() {
-            const shareText = document.getElementById('shareText');
-            const originalText = shareText.textContent;
+            const originalText = "Скопировано!";
             navigator.clipboard.writeText(window.location.href).then(() => {
-                shareText.textContent = "Скопировано!";
-                setTimeout(() => { shareText.textContent = originalText; }, 2000);
-            }).catch(() => {
-                shareText.textContent = "Скопировано!";
-                setTimeout(() => { shareText.textContent = originalText; }, 2000);
-            });
+                alert(originalText);
+            }).catch(() => { alert(originalText); });
         }
 
         function updateSubscribeButtonUI() {
@@ -731,7 +880,7 @@
             renderSubscriptionsList(); 
         }
 
-       
+        // Авторизация и профиль
         function openAuthModal() { document.getElementById('authModal').style.display = 'flex'; }
         function closeAuthModal() { document.getElementById('authModal').style.display = 'none'; resetAuthErrors(); }
         function switchAuthTab(type) {
@@ -790,6 +939,20 @@
             }
             renderSubscriptionsList();
             if (currentPlayingVideo) updateInteractionUI();
+        }
+
+        function saveChannelSettings() {
+            const newName = document.getElementById('editChannelName').value.trim();
+            const newAvatar = document.getElementById('editChannelAvatar').value.trim();
+            if (newName && newAvatar) {
+                currentUser.name = newName; currentUser.avatarUrl = newAvatar;
+                localStorage.setItem('et_current_user', JSON.stringify(currentUser));
+                let users = JSON.parse(localStorage.getItem('et_users')) || [];
+                const userIndex = users.findIndex(u => u.email === currentUser.email);
+                if (userIndex !== -1) { users[userIndex] = currentUser; localStorage.setItem('et_users', JSON.stringify(users)); }
+                checkUserSession(); 
+                const msg = document.getElementById('saveMsg'); msg.style.display = 'block'; setTimeout(() => msg.style.display = 'none', 3000);
+            }
         }
 
         function logout() {
