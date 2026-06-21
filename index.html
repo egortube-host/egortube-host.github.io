@@ -395,7 +395,7 @@
                             <div class="egor-icon-circle" id="egorLikeBtn"><i class="fas fa-thumbs-up"></i></div>
                             <span id="egorLikesCount">0</span>
                         </div>
-                        <!-- ДОБАВЛЕНА РАБОЧАЯ КНОПКА ДИЗЛАЙКА ДЛЯ EGORS -->
+                       
                         <div class="egor-action-btn" onclick="toggleEgorDislike()">
                             <div class="egor-icon-circle" id="egorDislikeBtn"><i class="fas fa-thumbs-down"></i></div>
                             <span id="egorDislikesCount">0</span>
@@ -443,7 +443,7 @@
         </div>
     </div>
 
-    <!-- ДОБАВЛЕНА ПАСХАЛКА "О САЙТЕ" -->
+ 
     <div class="modal-overlay" id="aboutSiteModal">
         <div class="m3-dialog">
             <h2 style="margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
@@ -494,7 +494,7 @@
         }
 
         const mockVideos = [
-            { id: 1, videoId: "ghockuq2bi3tka3keg00ro", title: "Egorkaegorov - Хочу быть как Егор | Премьера клипа", category: "Музыка", thumbnailUrl: "https://ia600802.us.archive.org/21/items/egorphotoegortubeprew/photo_2026-06-14_02-35-11.jpg", videoUrl: "https://ia600802.us.archive.org/21/items/egorphotoegortubeprew/wTiMdQP7aIVgk6Nok9Cz%2B5JpA5SVVpac.mp4", channelName: "Egorkaegorov", channelAvatar: "https://ia600802.us.archive.org/21/items/egorphotoegortubeprew/Gemini_Generated_Image_ubil5vubil5vubil.png", uploadDate: "2026-06-14", baseLikes: 0, views: "нет подписчиков" },
+            { id: 1, videoId: "ghockuq2bi3tka3keg00ro", title: "Egorkaegorov - Хочу быть как Егор | Премьера клипа", category: "Музыка", thumbnailUrl: "https://ia600802.us.archive.org/21/items/egorphotoegortubeprew/photo_2026-06-14_02-35-11.jpg", videoUrl: "https://ia801601.us.archive.org/22/items/egorkaegorov-life-goes-on-lyric-video/%D1%85%D0%BE%D1%87%D1%83%20%D0%B1%D1%8B%D1%82%D1%8C%20%D0%BA%D0%B0%D0%BA%20%D0%B5%D0%B3%D0%BE%D1%80%20final.mp4", channelName: "Egorkaegorov", channelAvatar: "https://ia600802.us.archive.org/21/items/egorphotoegortubeprew/Gemini_Generated_Image_ubil5vubil5vubil.png", uploadDate: "2026-06-14", baseLikes: 0, views: "нет подписчиков" },
             { id: 2, videoId: "b8x9mzq1opk3", title: "Egorkaegorov - Life Goes On (feat. Ty P.Diddy $ign) [Lyric Video]", category: "Музыка", thumbnailUrl: "https://ia600802.us.archive.org/21/items/egorphotoegortubeprew/photo_2026-06-20_01-14-29.jpg", videoUrl: "https://ia601601.us.archive.org/22/items/egorkaegorov-life-goes-on-lyric-video/egorkaegorov%20-%20Life%20Goes%20On%20%5BLyric%20Video%5D.mp4", channelName: "Egorkaegorov", channelAvatar: "https://ia600802.us.archive.org/21/items/egorphotoegortubeprew/Gemini_Generated_Image_ubil5vubil5vubil.png", uploadDate: "2026-06-20", baseLikes: 0, views: "нет подписчиков" },
             { id: 3, videoId: "v4r7tyuiop0s", title: "Игры будущего - Обзор говна", category: "Видеоигры", thumbnailUrl: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600&h=337&fit=crop", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4", channelName: "Future Games", channelAvatar: "https://i.pravatar.cc/150?u=11", uploadDate: "2021-05-14", baseLikes: 0, views: "нет подписчиков" },
             { id: 4, videoId: "m9g1csfx89kl", title: "alonmesk - PIDORSKY PIDORAS", category: "Музыка", thumbnailUrl: "https://i.ytimg.com/vi/XGE3Gtpvs24/hqdefault.jpg?sqp=-oaymwEnCNACELwBSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLDVBy8_qq0htXncw7XCzPzBWZfPgQ", videoUrl: "https://ia600802.us.archive.org/21/items/egorphotoegortubeprew/alonmesk%20-%20PIDORSKY%20PIDORAS.mp4", channelName: "alonmesk", channelAvatar: "https://yt3.ggpht.com/TIE0EqOVTVn1JHv4JzHSzD2juqiRHBlV3ZT_GfKKooQ0br_EB5lv2OWUU91wgIObi9R7TSIWOg=s48-c-k-c0x00ffffff-no-rj", uploadDate: "2025-11-04", baseLikes: 0, views: "нет подписчиков" },
@@ -842,7 +842,7 @@
             } else {
                 btn.classList.add('active');
                 cnt.textContent = "1";
-                // Сброс дизлайка
+             
                 const disBtn = document.getElementById('egorDislikeBtn');
                 if(disBtn.classList.contains('active')) {
                     disBtn.classList.remove('active');
