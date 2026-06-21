@@ -88,7 +88,13 @@
         .chip.active { background-color: var(--yt-chip-active-bg); color: var(--yt-chip-active-text); }
 
         .layout { display: flex; margin-top: 56px; height: calc(100vh - 56px); }
-        aside { width: 240px; background-color: var(--yt-background); padding: 12px; overflow-y: auto; flex-shrink: 0; position: fixed; height: calc(100vh - 56px); z-index: 90; transition: var(--transition-smooth); }
+        
+        aside { 
+            width: 240px; background-color: var(--yt-background); padding: 12px; overflow-y: auto; 
+            flex-shrink: 0; position: fixed; height: calc(100vh - 56px); z-index: 90; 
+            transition: var(--transition-smooth); 
+            display: flex; flex-direction: column;
+        }
         aside::-webkit-scrollbar { width: 8px; }
         aside:hover::-webkit-scrollbar-thumb { background: #717171; }
         aside::-webkit-scrollbar-thumb { background: transparent; }
@@ -112,6 +118,12 @@
         .nav-sub-item:hover { background-color: var(--yt-surface-hover); }
         .nav-avatar { width: 24px; height: 24px; border-radius: 50%; background-color: #444; object-fit: cover; flex-shrink: 0; }
         .nav-sub-item span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex: 1; }
+
+        .easter-egg-zone {
+            margin-top: auto; padding: 20px 0; text-align: center; font-size: 10px; 
+            color: #121212; cursor: pointer; user-select: none; transition: color 0.3s;
+        }
+        .easter-egg-zone:hover { color: #1f1f1f; }
 
         main { flex: 1; padding: 24px; overflow-y: auto; margin-left: 240px; margin-top: 56px; transition: var(--transition-smooth); } 
         main.player-active { margin-top: 0; } 
@@ -320,16 +332,20 @@
 
     <div class="layout">
         <aside>
-            <div class="nav-item active" id="nav-home" onclick="changeRoute('home')"><i class="fas fa-home"></i> <span>Главная</span></div>
-            <div class="nav-item" id="nav-egors" onclick="changeRoute('egors')"><i class="fas fa-bolt"></i> <span>Egors</span></div>
-            <div class="nav-divider"></div>
-            <div class="nav-section-title">Подписки <i class="fas fa-chevron-right"></i></div>
-            <div id="subsContainer"><div style="padding: 0 12px; font-size: 13px; color: var(--yt-text-secondary);">Войдите, чтобы видеть подписки</div></div>
-            <div class="nav-divider"></div>
-            <div class="nav-section-title" onclick="changeRoute('channel')">Вы <i class="fas fa-chevron-right"></i></div>
-            <div class="nav-item" id="nav-channel" onclick="changeRoute('channel')"><i class="far fa-user-circle"></i> <span>Мой канал</span></div>
-            <div class="nav-item" id="nav-history" onclick="changeRoute('history')"><i class="fas fa-history"></i> <span>История</span></div>
-            <div class="nav-item" id="nav-library" onclick="changeRoute('library')"><i class="fas fa-folder"></i> <span>Плейлисты</span></div>
+            <div>
+                <div class="nav-item active" id="nav-home" onclick="changeRoute('home')"><i class="fas fa-home"></i> <span>Главная</span></div>
+                <div class="nav-item" id="nav-egors" onclick="changeRoute('egors')"><i class="fas fa-bolt"></i> <span>Egors</span></div>
+                <div class="nav-divider"></div>
+                <div class="nav-section-title">Подписки <i class="fas fa-chevron-right"></i></div>
+                <div id="subsContainer"><div style="padding: 0 12px; font-size: 13px; color: var(--yt-text-secondary);">Войдите, чтобы видеть подписки</div></div>
+                <div class="nav-divider"></div>
+                <div class="nav-section-title" onclick="changeRoute('channel')">Вы <i class="fas fa-chevron-right"></i></div>
+                <div class="nav-item" id="nav-channel" onclick="changeRoute('channel')"><i class="far fa-user-circle"></i> <span>Мой канал</span></div>
+                <div class="nav-item" id="nav-history" onclick="changeRoute('history')"><i class="fas fa-history"></i> <span>История</span></div>
+                <div class="nav-item" id="nav-library" onclick="changeRoute('library')"><i class="fas fa-folder"></i> <span>Плейлисты</span></div>
+            </div>
+            
+            <div class="easter-egg-zone" onclick="triggerEasterEgg()">02 07</div>
         </aside>
 
         <main id="mainContainer">
@@ -347,7 +363,7 @@
                             <div class="channel-avatar" id="playerChannelAvatar">C</div>
                             <div class="player-channel-text">
                                 <span class="player-channel-name" id="playerChannelName">Название канала</span>
-                                <span class="player-channel-subs">нет подписчиков</span>
+                                <span class="player-channel-subs">0 подписчиков</span>
                             </div>
                             <button class="btn-subscribe unsubscribed" id="subscribeBtn">Подписаться</button>
                         </div>
@@ -469,21 +485,37 @@
     </div>
 
     <script>
-        const CURRENT_DATE = new Date("2026-06-14T00:00:00");
+        console.log("%c02.07... Грядет что-то великое.", "color: #ff0000; font-size: 20px; font-weight: bold; background: #000; padding: 10px; border-radius: 5px;");
+
+        function getNoun(number, one, two, five) {
+            let n = Math.abs(number);
+            n %= 100;
+            if (n >= 5 && n <= 20) return five;
+            n %= 10;
+            if (n === 1) return one;
+            if (n >= 2 && n <= 4) return two;
+            return five;
+        }
 
         function timeAgo(dateString) {
             const uploadDate = new Date(dateString);
-            const diffTime = Math.abs(CURRENT_DATE - uploadDate);
-            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            const diffTime = Date.now() - uploadDate.getTime();
+            
+            if (diffTime < 0) return "Скоро...";
+
+            const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
             
             if (diffDays === 0) return "Сегодня";
-            if (diffDays === 1) return "1 день назад";
-            if (diffDays < 5) return `${diffDays} дня назад`;
-            if (diffDays < 31) return `${diffDays} дней назад`;
+            
+            if (diffDays < 30) {
+                return `${diffDays} ${getNoun(diffDays, 'день', 'дня', 'дней')} назад`;
+            }
             const diffMonths = Math.floor(diffDays / 30);
-            if (diffMonths < 12) return `${diffMonths} мес. назад`;
+            if (diffMonths < 12) {
+                return `${diffMonths} ${getNoun(diffMonths, 'месяц', 'месяца', 'месяцев')} назад`;
+            }
             const diffYears = Math.floor(diffMonths / 12);
-            return `${diffYears} лет назад`;
+            return `${diffYears} ${getNoun(diffYears, 'год', 'года', 'лет')} назад`;
         }
 
         function formatNumber(num) {
@@ -493,12 +525,36 @@
             return num;
         }
 
+        function triggerEasterEgg() {
+            alert("02.07. Отметь этот день в календаре. Изменения неизбежны.");
+        }
+
         const mockVideos = [
-            { id: 1, videoId: "ghockuq2bi3tka3keg00ro", title: "Egorkaegorov - Хочу быть как Егор | Премьера клипа", category: "Музыка", thumbnailUrl: "https://ia600802.us.archive.org/21/items/egorphotoegortubeprew/photo_2026-06-14_02-35-11.jpg", videoUrl: "https://ia801601.us.archive.org/22/items/egorkaegorov-life-goes-on-lyric-video/%D1%85%D0%BE%D1%87%D1%83%20%D0%B1%D1%8B%D1%82%D1%8C%20%D0%BA%D0%B0%D0%BA%20%D0%B5%D0%B3%D0%BE%D1%80%20final.mp4", channelName: "Egorkaegorov", channelAvatar: "https://ia600802.us.archive.org/21/items/egorphotoegortubeprew/Gemini_Generated_Image_ubil5vubil5vubil.png", uploadDate: "2026-06-14", baseLikes: 0, views: "нет подписчиков" },
-            { id: 2, videoId: "b8x9mzq1opk3", title: "Egorkaegorov - Life Goes On (feat. Ty P.Diddy $ign) [Lyric Video]", category: "Музыка", thumbnailUrl: "https://ia600802.us.archive.org/21/items/egorphotoegortubeprew/photo_2026-06-20_01-14-29.jpg", videoUrl: "https://ia601601.us.archive.org/22/items/egorkaegorov-life-goes-on-lyric-video/egorkaegorov%20-%20Life%20Goes%20On%20%5BLyric%20Video%5D.mp4", channelName: "Egorkaegorov", channelAvatar: "https://ia600802.us.archive.org/21/items/egorphotoegortubeprew/Gemini_Generated_Image_ubil5vubil5vubil.png", uploadDate: "2026-06-20", baseLikes: 0, views: "нет подписчиков" },
-            { id: 3, videoId: "v4r7tyuiop0s", title: "Игры будущего - Обзор говна", category: "Видеоигры", thumbnailUrl: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600&h=337&fit=crop", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4", channelName: "Future Games", channelAvatar: "https://i.pravatar.cc/150?u=11", uploadDate: "2021-05-14", baseLikes: 0, views: "нет подписчиков" },
-            { id: 4, videoId: "m9g1csfx89kl", title: "alonmesk - PIDORSKY PIDORAS", category: "Музыка", thumbnailUrl: "https://i.ytimg.com/vi/XGE3Gtpvs24/hqdefault.jpg?sqp=-oaymwEnCNACELwBSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLDVBy8_qq0htXncw7XCzPzBWZfPgQ", videoUrl: "https://ia600802.us.archive.org/21/items/egorphotoegortubeprew/alonmesk%20-%20PIDORSKY%20PIDORAS.mp4", channelName: "alonmesk", channelAvatar: "https://yt3.ggpht.com/TIE0EqOVTVn1JHv4JzHSzD2juqiRHBlV3ZT_GfKKooQ0br_EB5lv2OWUU91wgIObi9R7TSIWOg=s48-c-k-c0x00ffffff-no-rj", uploadDate: "2025-11-04", baseLikes: 0, views: "нет подписчиков" },
-            { id: 5, videoId: "n4tur3f1r300", title: "неДикая природа: бебе пожары", category: "Экшен и приключения", thumbnailUrl: "https://images.unsplash.com/photo-1504280741564-92434b9d0e2e?w=600&h=337&fit=crop", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4", channelName: "Discovery Nature", channelAvatar: "https://i.pravatar.cc/150?u=13", uploadDate: "2023-06-01", baseLikes: 0, views: "нет подписчиков" }
+            { id: 1, videoId: "ghockuq2bi3tka3keg00ro", title: "Egorkaegorov - Хочу быть как Егор | Премьера клипа", category: "Музыка", thumbnailUrl: "https://ia600802.us.archive.org/21/items/egorphotoegortubeprew/photo_2026-06-14_02-35-11.jpg", videoUrl: "https://ia801601.us.archive.org/22/items/egorkaegorov-life-goes-on-lyric-video/%D1%85%D0%BE%D1%87%D1%83%20%D0%B1%D1%8B%D1%82%D1%8C%20%D0%BA%D0%B0%D0%BA%20%D0%B5%D0%B3%D0%BE%D1%80%20final.mp4", channelName: "Egorkaegorov", channelAvatar: "https://ia600802.us.archive.org/21/items/egorphotoegortubeprew/Gemini_Generated_Image_ubil5vubil5vubil.png", uploadDate: "2026-06-14", baseLikes: 0, views: "1.2 тыс. просмотров" },
+            { id: 2, videoId: "b8x9mzq1opk3", title: "Egorkaegorov - Life Goes On (feat. Ty P.Diddy $ign) [Lyric Video]", category: "Музыка", thumbnailUrl: "https://ia600802.us.archive.org/21/items/egorphotoegortubeprew/photo_2026-06-20_01-14-29.jpg", videoUrl: "https://ia601601.us.archive.org/22/items/egorkaegorov-life-goes-on-lyric-video/egorkaegorov%20-%20Life%20Goes%20On%20%5BLyric%20Video%5D.mp4", channelName: "Egorkaegorov", channelAvatar: "https://ia600802.us.archive.org/21/items/egorphotoegortubeprew/Gemini_Generated_Image_ubil5vubil5vubil.png", uploadDate: "2026-06-20", baseLikes: 0, views: "3.5 тыс. просмотров" },
+            { id: 3, videoId: "v4r7tyuiop0s", title: "Игры будущего - Обзор говна", category: "Видеоигры", thumbnailUrl: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600&h=337&fit=crop", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4", channelName: "Future Games", channelAvatar: "https://i.pravatar.cc/150?u=11", uploadDate: "2021-05-14", baseLikes: 0, views: "800 просмотров" },
+            { id: 4, videoId: "m9g1csfx89kl", title: "alonmesk - PIDORSKY PIDORAS", category: "Музыка", thumbnailUrl: "https://i.ytimg.com/vi/XGE3Gtpvs24/hqdefault.jpg?sqp=-oaymwEnCNACELwBSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLDVBy8_qq0htXncw7XCzPzBWZfPgQ", videoUrl: "https://ia600802.us.archive.org/21/items/egorphotoegortubeprew/alonmesk%20-%20PIDORSKY%20PIDORAS.mp4", channelName: "alonmesk", channelAvatar: "https://i.pravatar.cc/150?u=1", uploadDate: "2025-11-04", baseLikes: 0, views: "6.6 тыс. просмотров" },
+            { id: 5, videoId: "n4tur3f1r300", title: "неДикая природа: бебе пожары", category: "Экшен и приключения", thumbnailUrl: "https://images.unsplash.com/photo-1504280741564-92434b9d0e2e?w=600&h=337&fit=crop", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4", channelName: "Discovery Nature", channelAvatar: "https://i.pravatar.cc/150?u=13", uploadDate: "2023-06-01", baseLikes: 0, views: "100 тыс. просмотров" },
+            { id: 6, videoId: "vid_006", title: "Майнкрафт, но я не могу прыгать", category: "Minecraft", thumbnailUrl: "https://images.unsplash.com/photo-1607853202273-797f1c22a38e?w=600&h=337&fit=crop", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", channelName: "MineKing", channelAvatar: "https://i.pravatar.cc/150?u=30", uploadDate: "2024-01-10", baseLikes: 0, views: "15 тыс. просмотров" },
+            { id: 7, videoId: "vid_007", title: "Топ 10 лучших рэп альбомов", category: "Рэп", thumbnailUrl: "https://images.unsplash.com/photo-1493225457124-a1a2a5f5f9af?w=600&h=337&fit=crop", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4", channelName: "RapReview", channelAvatar: "https://i.pravatar.cc/150?u=31", uploadDate: "2025-12-05", baseLikes: 0, views: "9 тыс. просмотров" },
+            { id: 8, videoId: "vid_008", title: "Создаем стол из эпоксидной смолы", category: "Ремесла", thumbnailUrl: "https://images.unsplash.com/photo-1533090161767-e6ffed986c88?w=600&h=337&fit=crop", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4", channelName: "DIY Master", channelAvatar: "https://i.pravatar.cc/150?u=32", uploadDate: "2023-08-20", baseLikes: 0, views: "250 тыс. просмотров" },
+            { id: 9, videoId: "vid_009", title: "Спидран GTA San Andreas за 12 минут", category: "Видеоигры", thumbnailUrl: "https://images.unsplash.com/photo-1538481199005-a4d5fe1f66d4?w=600&h=337&fit=crop", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4", channelName: "SpeedRunnerZ", channelAvatar: "https://i.pravatar.cc/150?u=33", uploadDate: "2024-11-11", baseLikes: 0, views: "1.2 млн просмотров" },
+            { id: 10, videoId: "vid_010", title: "Стрим: Общаемся и играем", category: "Сейчас в эфире", thumbnailUrl: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600&h=337&fit=crop", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4", channelName: "LiveGamer", channelAvatar: "https://i.pravatar.cc/150?u=34", uploadDate: "2026-06-21", baseLikes: 0, views: "500 зрителей" },
+            { id: 11, videoId: "vid_011", title: "Путешествие в заброшенный город", category: "Экшен и приключения", thumbnailUrl: "https://images.unsplash.com/photo-1518005020951-eccb494ad742?w=600&h=337&fit=crop", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4", channelName: "Urbex World", channelAvatar: "https://i.pravatar.cc/150?u=35", uploadDate: "2022-04-16", baseLikes: 0, views: "5 тыс. просмотров" },
+            { id: 12, videoId: "vid_012", title: "Как собрать мощный ПК в 2026", category: "Ремесла", thumbnailUrl: "https://images.unsplash.com/photo-1587202372634-32705e3bf49c?w=600&h=337&fit=crop", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4", channelName: "TechGuru", channelAvatar: "https://i.pravatar.cc/150?u=36", uploadDate: "2026-01-20", baseLikes: 0, views: "80 тыс. просмотров" },
+            { id: 13, videoId: "vid_013", title: "Lo-Fi Hip Hop Radio - Beats to Relax", category: "Музыка", thumbnailUrl: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=600&h=337&fit=crop", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4", channelName: "ChillVibes", channelAvatar: "https://i.pravatar.cc/150?u=37", uploadDate: "2025-05-10", baseLikes: 0, views: "4 млн просмотров" },
+            { id: 14, videoId: "vid_014", title: "Minecraft 100 дней выживания", category: "Minecraft", thumbnailUrl: "https://images.unsplash.com/photo-1623934199716-dc28818a6ec7?w=600&h=337&fit=crop", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4", channelName: "BlockMaster", channelAvatar: "https://i.pravatar.cc/150?u=38", uploadDate: "2024-08-30", baseLikes: 0, views: "2.1 млн просмотров" },
+            { id: 15, videoId: "vid_015", title: "Новый трек Eminem - Реакция", category: "Рэп", thumbnailUrl: "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=600&h=337&fit=crop", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/VolkswagenGTIReview.mp4", channelName: "ReactBoy", channelAvatar: "https://i.pravatar.cc/150?u=39", uploadDate: "2025-02-14", baseLikes: 0, views: "12 тыс. просмотров" },
+            { id: 16, videoId: "vid_016", title: "Выживание в тайге без снаряжения", category: "Экшен и приключения", thumbnailUrl: "https://images.unsplash.com/photo-1448375240586-882707db888b?w=600&h=337&fit=crop", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4", channelName: "BearGrill", channelAvatar: "https://i.pravatar.cc/150?u=40", uploadDate: "2021-11-20", baseLikes: 0, views: "450 тыс. просмотров" },
+            { id: 17, videoId: "vid_017", title: "Как сделать нож из гвоздя", category: "Ремесла", thumbnailUrl: "https://images.unsplash.com/photo-1504148455328-c376907d081c?w=600&h=337&fit=crop", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4", channelName: "Blacksmith", channelAvatar: "https://i.pravatar.cc/150?u=41", uploadDate: "2023-03-08", baseLikes: 0, views: "110 тыс. просмотров" },
+            { id: 18, videoId: "vid_018", title: "Турнир по CS:GO - Финал", category: "Видеоигры", thumbnailUrl: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600&h=337&fit=crop", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4", channelName: "CyberSport", channelAvatar: "https://i.pravatar.cc/150?u=42", uploadDate: "2026-05-10", baseLikes: 0, views: "800 тыс. просмотров" },
+            { id: 19, videoId: "vid_019", title: "Jazz Session 2026 (Live)", category: "Музыка", thumbnailUrl: "https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=600&h=337&fit=crop", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4", channelName: "JazzClub", channelAvatar: "https://i.pravatar.cc/150?u=43", uploadDate: "2026-06-01", baseLikes: 0, views: "8 тыс. просмотров" },
+            { id: 20, videoId: "vid_020", title: "Майнкрафт Прятки с друзьями", category: "Minecraft", thumbnailUrl: "https://images.unsplash.com/photo-1607853202273-797f1c22a38e?w=600&h=337&fit=crop", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4", channelName: "FunCraft", channelAvatar: "https://i.pravatar.cc/150?u=44", uploadDate: "2025-10-15", baseLikes: 0, views: "200 тыс. просмотров" },
+            { id: 21, videoId: "vid_021", title: "Секреты создания битов", category: "Рэп", thumbnailUrl: "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=600&h=337&fit=crop", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4", channelName: "BeatMaker", channelAvatar: "https://i.pravatar.cc/150?u=45", uploadDate: "2026-03-22", baseLikes: 0, views: "14 тыс. просмотров" },
+            { id: 22, videoId: "vid_022", title: "Прыжок с парашютом от первого лица", category: "Экшен и приключения", thumbnailUrl: "https://images.unsplash.com/photo-1521685133646-6d55700b3e63?w=600&h=337&fit=crop", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4", channelName: "Adrenaline", channelAvatar: "https://i.pravatar.cc/150?u=46", uploadDate: "2022-08-05", baseLikes: 0, views: "340 тыс. просмотров" },
+            { id: 23, videoId: "vid_023", title: "Ремонт старого мотоцикла Урал", category: "Ремесла", thumbnailUrl: "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=600&h=337&fit=crop", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4", channelName: "MotoGarage", channelAvatar: "https://i.pravatar.cc/150?u=47", uploadDate: "2024-05-12", baseLikes: 0, views: "500 тыс. просмотров" },
+            { id: 24, videoId: "vid_024", title: "Elden Ring: Битва с Маленией", category: "Видеоигры", thumbnailUrl: "https://images.unsplash.com/photo-1605901309584-818e25960b8f?w=600&h=337&fit=crop", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4", channelName: "SoulGamer", channelAvatar: "https://i.pravatar.cc/150?u=48", uploadDate: "2024-02-28", baseLikes: 0, views: "1.8 млн просмотров" },
+            { id: 25, videoId: "vid_025", title: "Новости музыки 2026", category: "Музыка", thumbnailUrl: "https://images.unsplash.com/photo-1493225457124-a1a2a5f5f9af?w=600&h=337&fit=crop", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/VolkswagenGTIReview.mp4", channelName: "MusicNews", channelAvatar: "https://i.pravatar.cc/150?u=49", uploadDate: "2026-06-21", baseLikes: 0, views: "3 тыс. просмотров" }
         ];
 
         const mockEgors = [
@@ -508,7 +564,25 @@
             { videoId: "pQ1rR2sS3tU", title: "Epic пепик ааааа", channelName: "@GayMaster", channelAvatar: "https://i.pravatar.cc/150?u=24", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4", likes: "0", comments: "0" },
             { videoId: "mN5oO6pP7qQ", title: "Qорлпорлопоп", channelName: "@sdfgyr", channelAvatar: "https://i.pravatar.cc/150?u=25", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4", likes: "0", comments: "0" },
             { videoId: "jK8lL9mM0nN", title: "Dрвпрвапрапрвапрвапррпа", channelName: "@sdjjfg", channelAvatar: "https://i.pravatar.cc/150?u=26", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4", likes: "0", comments: "0" },
-            { videoId: "hI1jJ2kK3lL", title: "врпаааааа", channelName: "@dsgd", channelAvatar: "https://i.pravatar.cc/150?u=27", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4", likes: "0", comments: "0" }
+            { videoId: "hI1jJ2kK3lL", title: "врпаааааа", channelName: "@dsgd", channelAvatar: "https://i.pravatar.cc/150?u=27", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4", likes: "0", comments: "0" },
+            { videoId: "egor_008", title: "Случай на стриме 😅", channelName: "@StreamFails", channelAvatar: "https://i.pravatar.cc/150?u=50", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4", likes: "0", comments: "0" },
+            { videoId: "egor_009", title: "Паркур неудача", channelName: "@ParkourLife", channelAvatar: "https://i.pravatar.cc/150?u=51", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4", likes: "0", comments: "0" },
+            { videoId: "egor_010", title: "Смешной кот", channelName: "@CatMemes", channelAvatar: "https://i.pravatar.cc/150?u=52", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4", likes: "0", comments: "0" },
+            { videoId: "egor_011", title: "Фокус с картами", channelName: "@MagicTrick", channelAvatar: "https://i.pravatar.cc/150?u=53", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4", likes: "0", comments: "0" },
+            { videoId: "egor_012", title: "Быстрый рецепт завтрака", channelName: "@FoodShorts", channelAvatar: "https://i.pravatar.cc/150?u=54", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4", likes: "0", comments: "0" },
+            { videoId: "egor_013", title: "Новый танец в TikTok", channelName: "@DanceTrend", channelAvatar: "https://i.pravatar.cc/150?u=55", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4", likes: "0", comments: "0" },
+            { videoId: "egor_014", title: "Как завязать галстук", channelName: "@LifeHacks", channelAvatar: "https://i.pravatar.cc/150?u=56", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4", likes: "0", comments: "0" },
+            { videoId: "egor_015", title: "Мем года", channelName: "@Memes2026", channelAvatar: "https://i.pravatar.cc/150?u=57", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4", likes: "0", comments: "0" },
+            { videoId: "egor_016", title: "Трюк на скейте", channelName: "@SkateBoy", channelAvatar: "https://i.pravatar.cc/150?u=58", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/VolkswagenGTIReview.mp4", likes: "0", comments: "0" },
+            { videoId: "egor_017", title: "Собака поет песню", channelName: "@FunnyPets", channelAvatar: "https://i.pravatar.cc/150?u=59", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4", likes: "0", comments: "0" },
+            { videoId: "egor_018", title: "Распаковка посылки", channelName: "@UnboxMini", channelAvatar: "https://i.pravatar.cc/150?u=60", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4", likes: "0", comments: "0" },
+            { videoId: "egor_019", title: "Иллюзия обмана", channelName: "@Illusionist", channelAvatar: "https://i.pravatar.cc/150?u=61", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4", likes: "0", comments: "0" },
+            { videoId: "egor_020", title: "Майнкрафт спидран за 10 сек", channelName: "@MineShorts", channelAvatar: "https://i.pravatar.cc/150?u=62", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4", likes: "0", comments: "0" },
+            { videoId: "egor_021", title: "Тяжелая тренировка", channelName: "@GymMotivation", channelAvatar: "https://i.pravatar.cc/150?u=63", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4", likes: "0", comments: "0" },
+            { videoId: "egor_022", title: "Красивый закат", channelName: "@NatureVibes", channelAvatar: "https://i.pravatar.cc/150?u=64", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4", likes: "0", comments: "0" },
+            { videoId: "egor_023", title: "Как правильно резать лук", channelName: "@ChefShorts", channelAvatar: "https://i.pravatar.cc/150?u=65", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4", likes: "0", comments: "0" },
+            { videoId: "egor_024", title: "Игра на гитаре", channelName: "@MusicCover", channelAvatar: "https://i.pravatar.cc/150?u=66", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4", likes: "0", comments: "0" },
+            { videoId: "egor_025", title: "Финал истории...", channelName: "@EgorEgora", channelAvatar: "https://ia600802.us.archive.org/21/items/egorphotoegortubeprew/Gemini_Generated_Image_ubil5vubil5vubil.png", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4", likes: "0", comments: "0" }
         ];
 
         let currentRoute = 'home';
